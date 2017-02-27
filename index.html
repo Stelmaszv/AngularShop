@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
+	<script src="https://cdn.rawgit.com/auth0/angular-storage/master/dist/angular-storage.js"></script>
+	<script src="https://cdn.rawgit.com/auth0/angular-jwt/master/dist/angular-jwt.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.0-beta.2/angular-sanitize.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+    <script src="js/angular-file-upload.min.js"></script>
+	<script src="js/admin.js"></script>
+	<script src="js/controler.js"></script>
+	<script src="js/directives.js"></script>
+	<script src="js/execution.js"></script>
+	<script src="js/viewcontroler.js"></script>
+	<script src="js/mainSetings.js"></script>
+	<script src="js/filtr.js"></script>
+	<link rel="stylesheet" type="text/css" href="style/style.css">
+	<title>shop</title>
+</head>
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<body ng-app="myApp">
+	<div class="col-xs-2"></div>
+	<div class="col-xs-8" id="insite">
+							<nav class="navbar navbar-default" ng-controller="navigation" id="nav">
+							  <div class="container-fluid">
+							    <!-- Brand and toggle get grouped for better mobile display -->
+							    <div class="navbar-header">
+							      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+							        <span class="sr-only">Toggle navigation</span>
+							        <span class="icon-bar"></span>
+							        <span class="icon-bar"></span>
+							        <span class="icon-bar"></span>
+							      </button>
+							      <a class="navbar-brand" href="#">Brand</a>
+							    </div>
+
+							    <!-- Collect the nav links, forms, and other content for toggling -->
+							    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+							      <ul class="nav navbar-nav">
+							        <li ng-class="{ active : isActive( '/index' ) }"    ><a href="#index">Strona Główna</a></a></li>
+							        <li ng-class="{ active : isActive( '/allproducts' ) }"><a href="#allproducts"  >Produkty</a></li>
+							        <li class="dropdown">
+							          <a ng-if="admin" href="#{{correntlocation()}}/#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Administracjia <span class="caret"></span></a>
+							          <ul class="dropdown-menu">
+							          	<li><a href="#adminsection/orders">Zamównia</a></li>
+							          	<li><a href="#adminsection/balance">Bilans</a></li>
+							          	<li><a href="#adminsection/users">Uzytkownicy</a></li>
+							            <li><a href="#adminsection/products">Produkty</a></li>
+							          </ul>
+							        </li>
+							      </ul>
+							      <ul class="nav navbar-nav navbar-right">
+							      	
+							      	<li ng-class="{ active : isActive( '/login' ) }" ng-if="!login"><a href="#login"><spam style="margin-right:5px;"></spam>Zaloguj sie</a></a></li>
+							      	<li ng-class="{ active : isActive( '/registration' ) }" ng-if="!login"><a href="#registration"><spam style="margin-right:5px;"></spam>Rejestracjia</a></a></li>
+							      		<li ng-class="{ active : isActive( '/cart' ) }"><a ng-if="!cart.length"  href="#cart"><spam style="margin-right:5px;" class="glyphicon glyphicon-shopping-cart"></spam>Koszyk pusty</a></a></li>
+							      		<li ng-class="{ active : isActive( '/cart' ) }" ><a ng-if="cart.length"  href="#cart"><spam style="margin-right:5px;" class="glyphicon glyphicon-shopping-cart"></spam>W koszyku <span class="badge">{{cart.length}}</span></a></a></li>
+					
+							        <li ng-if="login" class="dropdown">
+							          <a href="#{{correntlocation()}}/#" ng-click="return fasle" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Mój Profil<span class="caret"></span></a>
+							          <ul class="dropdown-menu">
+							          	<li><a href="#setProfil/masagess">Powiadmenia</a></li>
+							          	<li><a href="#setProfil/opinions">Moje opinie</a></li>
+							            <li><a href="#setProfil/showadress">Dane Adresowe</a></li>
+							            <li><a href="#setProfil/WishList">Lista Życzeń</a></li>
+							            <li><a href="#setProfil/orders">Historia Zamuwien</a></li>
+							            <li role="separator" class="divider"></li>
+							            <li ng-click="logOUT()"><a href="#">Wyloguj</a></li>
+							          </ul>
+							        </li>
+							      </ul>
+							    </div><!-- /.navbar-collapse -->
+							  </div><!-- /.container-fluid -->
+							</nav>
+							<div ng-view></div> 
+	 </div>
+</body>
+</html>
+
+

@@ -1,0 +1,89 @@
+<div id="insite_DIV_sum">
+	<h1>Twoje zamuwnie</h1>
+	<div  id="cartViewSum" class="row">
+			<div class="col-md-5 hed_item btn btn-primary" >Nazwa</div>
+  			<div class="col-md-1 hed_item btn btn-primary" >Ilosc</div>
+  			<div class="col-md-3 hed_item btn btn-primary" >Cena</div>
+  			<div class="col-md-3 hed_item btn btn-primary" >Razem</div>
+  	</div>
+	<div id="cartViewSum" ng-repeat="product in cart">
+						<div class="row">
+		  					<div class="col-md-5 item_loop" >{{product.name}} </div>
+		  					<div class="col-md-1 item_loop_number number_buttoon" >
+		  					<center >
+		  						{{product.qty}}
+		  					</center>
+		  					</div>
+
+		  					<div ng-if="product.stancount>0">
+		  						<div class="col-md-3 item_loop" ng-if="product.promotion_stan=='no'" ><center>{{product.qty}}  * {{product.price | number:2}} zł</center></div>
+		  						<div class="col-md-3 item_loop" ng-if="product.promotion_stan=='yes'" ><center>{{product.qty}}  * {{product.newprice | number:2}} zł</center></div>
+		  						<div class="col-md-3 item_loop" ng-if="product.promotion_stan=='no'" ><center>{{product.qty*product.price| number:2 }} zł</center></div>
+		  						<div class="col-md-3 item_loop" ng-if="product.promotion_stan=='yes'" ><center>{{product.qty*product.newprice| number:2 }} zł</center></div>
+		  					</div>
+		  				</div>
+	</div>
+	<div class="row" style="border-top:1px solid black;">
+	  		<div ng-if="diiverchused=='reception'" class="col-md-12 item_loop" >
+	  			<div class="col-md-10 pull-left" ><strong>Wybrana Płatnosc Płatnosc przy odbiorze</strong></div>
+	  			<div class="col-md-2 pull-right" ><strong>{{6 | number:2}} zł</strong></div>
+	  		</div>
+	  		<div ng-if="diiverchused=='transfer'" class="col-md-12 item_loop" >
+	  			<div class="col-md-10 pull-left" ><strong>Wybrana Płatnosc Przelew bankowy</strong></div>
+	  			<div class="col-md-2 pull-right" ><strong>{{3 | number:2}} zł</strong></div>
+	  		</div>
+	</div>
+	<div class="row">
+	  		<div ng-if="setscuset=='courier'" class="col-md-12 item_loop" >
+	  			<div class="col-md-10 pull-left" ><strong>Wybrana Wysłka Przesyłka kurierska</strong></div>
+	  			<div class="col-md-2 pull-right" ><strong>{{16 | number:2}} zł</strong></div>
+	  		</div>
+	  		<div ng-if="setscuset=='mail'" class="col-md-12 item_loop" >
+	  			<div class="col-md-10 pull-left" ><strong>Wybrana Wysłka Poczta Polskay</strong></div>
+	  			<div class="col-md-2 pull-right" ><strong>{{10 | number:2}} zł</strong></div>
+	  		</div>
+	  		<div ng-if="setscuset=='bymyself'" class="col-md-12 item_loop" >
+	  			<div class="col-md-10 pull-left" ><strong>Wybrana Wysłka Odbir Osobisty</strong></div>
+	  			<div class="col-md-2 pull-right" ><strong>{{0 | number:2}} zł</strong></div>
+	  		</div>
+	</div>
+	<div class="row" style="border-top:1px solid black;">
+	  		<div  class="col-md-12 item_loop" >
+	  			<div class="col-md-8 pull-left" ><strong>Do zapłaty</strong></div>
+	  			<div class="col-md-4 pull-right" ><strong>{{totalall | number:2}} zł</strong></div>
+	  		</div>
+	</div>
+
+	<h1>Dane Adresowe </h1>
+	<dl class="dl-horizontal">
+			<div  id="loopDIV">		
+				  <dt>Imie i Nazwiko</dt>
+				  <dd>{{adresschused[0].name}}</dd>			
+				  <dd>{{adresschused[0].surname}}</dd>
+				  <br><br>
+				  <dt>Miejscowość Ulica</dt>
+				  <dd>{{adresschused[0].city}}</dd>
+				  <dd>{{adresschused[0].adress}}</dd>
+				   <br><br>
+				  <dt>Województwo</dt>
+				  <dd>{{adresschused[0].region}}</dd>
+				   <br><br>
+				 
+				  <dt>Kod Pocztwy</dt>
+				  <dd>{{adresschused[0].postCode}}</dd>
+				   <br><br>
+				  <dt>Telefon kontaktowy</dt>
+				  <dd>{{adresschused[0].tele}}</dd>
+			</div>
+	</dl>
+	<div ng-click="confirmOreder()" class="btn btn-success btn-lg btn-block">Potwierdzam zamuwnie</div>
+</div>
+<style>
+#cartViewSum{
+	background-color: white;
+}
+.hed_item,.hed_item_empty{
+	border-radius: 0px;
+	border:0px solid black; 
+}
+<div>

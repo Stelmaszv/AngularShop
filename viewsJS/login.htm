@@ -1,0 +1,57 @@
+<div id="registration_title" class="col-md-12">Logowanie</div> 
+<br><br><br>
+
+<div ng-if="errors || notice" id="registration_erors">
+	<div  ng-if="notice!='login'" align=" " class="alert alert-danger" role="alert">
+		<b>Wystąpiły następujące błędy</b>
+		<li ng-if="submit">Nie poprawny Login lub hasło</li>
+		<li ng-if="notice=='buy'">Musisz sie zalogowac by muc kupic produkt <a href="#/product/show/{{id}}/{{title}}">{{title}}</a> </li>
+		<li ng-if="notice=='list'">Musisz sie zalogowac by muc dodac produkt <a href="#/product/show/{{id}}/{{title}}">{{title}}</a> do listy życzeń </li>
+
+
+
+	</div>
+	<div ng-if="notice=='login'"    class="alert alert-success opinionform" role="alert"> Witaj {{title}}!<br> Rejestracjia sie powodła mozesz sie zalogowac </div>
+</div>
+<div  id="registration_main_div" class="col-md-12">
+	<form ng-submit="logIN(user)" class="form-horizontal">
+	  <div ng-class="{'has-error': errors && submit }" class="form-group" id="form_elment" >
+	    <label for="inputEmail3" class="col-sm-2 control-label">Login</label>
+	    <div class="col-sm-10">
+	      <input type="text" class="form-control"  id="inputEmail3"  ng-model="user.login"  placeholder="login">
+	    </div>
+	  </div>
+	  <div class="form-group" ng-class="{'has-error': errors && submit }" id="form_elment"> 
+	    <label for="inputPassword3" class="col-sm-2 control-label">Haslo</label>
+	    <div class="col-sm-10">
+	      <input type="password" class="form-control" id="inputPassword3" ng-model="user.password" placeholder="hasło">
+	    </div>
+	  </div>
+	  <div class="form-group" id="form_elment_buttom">
+	    <div class="col-sm-offset-2 col-sm-10" >
+	      <div class="checkbox">
+	        <label>
+	          <input type="checkbox"> pamiętaj mnie {{galery}}
+	        </label>
+	      </div>
+	    </div>
+	  </div>
+	  <div class="form-group " id="form_elment_buttom">
+	    <div class="col-sm-offset-2 col-sm-10" >
+	      <button type="submit" class="btn btn-primary btn-lg btn-block" id="submit_registration">Zaloguj sie</button>
+	    </div>
+	  </div>
+	</form>
+</div>
+<style type="text/css">
+	#registration_main_div{
+		min-height: 100px;
+	}
+	#form_elment,#form_elment_buttom{
+		text-align: left;
+		margin-top: 50px;
+	}
+	#form_elment_buttom{
+		margin-top: 10px;
+	}
+</style>

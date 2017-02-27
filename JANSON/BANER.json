@@ -1,0 +1,40 @@
+[
+	{
+		"src" : "baners/baner01.png",
+		"namber" : 1
+
+	},
+	{
+		"src" : "baners/baner02.png",
+		"namber" : 2
+
+	},
+	{
+		"src" : "baners/baner03.png",
+		"namber" : 3
+	},
+	{
+		"src" : "baners/baner04.png",
+		"namber" : 4
+
+	},
+	{
+		"src" : "baners/baner01.png",
+		"namber" : 5
+
+	},
+	{
+		"src" : "baners/baner02.png",
+		"namber" : 6
+
+	},
+	{
+		"src" : "baners/baner03.png",
+		"namber" : 7
+	},
+	{
+		"src" : "baners/baner04.png",
+		"namber" : 8
+
+	}
+]

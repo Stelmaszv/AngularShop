@@ -1,0 +1,123 @@
+<div id="banner" style="background-image: url('web/dvsup.png');">
+	<center>
+		<img src="{{baner.src}}"  id="img_baner" width="900">
+			<br>			
+		<spam  ng-repeat="one in slites ">
+			<button type="button" id="button_banner" ng-click="actived_baner(one)"  class="btn btn-default" ><strong>{{one.namber}}</strong></button>	
+		</spam>
+	</center>
+</div>
+<div class="col-xs-6" id="table_div_left" style="background-image: url('web/subtle_surface.png');">
+		<div>
+				  <ul style="width:500px;" class="nav nav-tabs" role="tablist">
+				    <li style="margin:0px;" role="presentation"    class="active"  "><a  href="/#home" aria-controls="home" role="tab" data-toggle="tab">Bestselery</a></li>
+				    <li style="margin:0px;" role="presentation"  "><a  href="/#profile"  aria-controls="profile" role="tab" data-toggle="tab">Polecane</a></li>
+				    <li style="margin:0px;" role="presentation"  "><a  href="/#messages"   aria-controls="messages" role="tab" data-toggle="tab">Najnowsze</a></li>
+				    <li style="margin:0px;" role="presentation"  "><a  href="/#chipest"   aria-controls="chipest" role="tab" data-toggle="tab">Najtańsze</a></li>
+				    <li style="margin:0px;" role="presentation"  "><a  href="/#promition"   aria-controls="promition" role="tab" data-toggle="tab">W promocji</a></li>
+				  </ul>
+				  <div  style="width:500px; background-color: #eee; border:1px solid #777;" class="tab-content" id="view_table">
+				    <div role="tabpanel" class="tab-pane active" id="home">
+						
+  						<ol>
+				    	<table class="table table-hover" style="max-width:500px;" class="pull left">   		    
+				    		
+				    			<tr ng-repeat="product in products |  orderBy : '-selled' | limitTo :10"> 
+						    		
+						    			
+							    			<td  > <li><img id="img_place"   src="style/web/no-image.png"   ng-if="product.photo == ''"><img id="img_place"  src="photo/{{product.id_prod}}/{{product.photo}}"  ng-if="product.photo !=''"></li></td>
+							    			<td id="name_product_box" class="pull left"><b><a id="linkblack" href="#/product/show/{{product.id_prod}}/{{product.name}}">{{product.name}}</a></b><br>
+							    				{{product.catname}},{{product.subname}}
+							    			</td>
+							    			<td>	    				
+							    				<spam class="btn btn-success" disibled>{{product.price  | number:2 }} zł</spam>
+							    			</td>
+						    		
+					    		</tr>
+				    	</table>
+				    	</ol>
+						
+				    </div>
+				    <div role="tabpanel" class="tab-pane" id="profile">
+				    	<ol>
+				    	<table class="table table-hover">   		    
+				    		<tr ng-repeat="product in products |  orderBy : '-recomended' | limitTo :10"> 
+				    			<td  > <li><img id="img_place"   src="style/web/no-image.png"   ng-if="product.photo == ''"><img id="img_place"  src="photo/{{product.id_prod}}/{{product.photo}}"  ng-if="product.photo !=''"></li></td>
+							    			<td id="name_product_box" class="pull left"><b><a id="linkblack" href="#/product/show/{{product.id_prod}}/{{product.name}}">{{product.name}}</a></b><br>
+							    				{{product.catname}},{{product.subname}}
+							    			</td>
+							    			<td>	    				
+							    				<spam ng-if="product.promotion_stan=='no'" class="btn btn-success" disibled>{{product.price  | number:2 }} zł</spam>
+							    				<spam ng-if="product.promotion_stan=='yes'" class="btn btn-success" disibled>{{product.newprice  | number:2 }} zł</spam>
+							    			</td>
+				    		</tr>
+				    	</table>
+				    	</ol>
+				    </div>
+				    <div role="tabpanel" class="tab-pane" id="messages">
+				    	<ol>
+				    	<table class="table table-hover">   		    
+				    		<tr ng-repeat="product in products |  orderBy : '-added' | limitTo :10"> 
+				    			<td  > <li><img id="img_place"   src="style/web/no-image.png"   ng-if="product.photo == ''"><img id="img_place"  src="photo/{{product.id_prod}}/{{product.photo}}" ng-if="product.photo !=''"></li></td>
+							   	<td id="name_product_box" class="pull left"><b><a id="linkblack" href="#/product/show/{{product.id_prod}}/{{product.name}}">{{product.name}}</a></b><br>
+							    				{{product.catname}},{{product.subname}}
+							    </td>
+							    	<td>	    				
+							    		<spam ng-if="product.promotion_stan=='no'" class="btn btn-success" disibled>{{product.price  | number:2 }} zł</spam>
+							    		<spam ng-if="product.promotion_stan=='yes'" class="btn btn-success" disibled>{{product.newprice  | number:2 }} zł</spam>
+							    	</td>
+				    		</tr>
+				    	</table>
+				    	</ol>
+				    </div>
+				    <div role="tabpanel" class="tab-pane" id="chipest">
+				    <ol>
+				    	<table class="table table-hover">   		    
+				    		<tr ng-repeat="product in products |  orderBy : '-price' | limitTo :10 " ng-if="product.promotion_stan=='no'">	
+				    			<td  > <li><img id="img_place"   src="style/web/no-image.png"   ng-if="product.photo == ''"><img id="img_place"  src="photo/{{product.id_prod}}/{{product.photo}}"  ng-if="product.photo !=''"></li></td>
+							    	<td id="name_product_box" class="pull left"><b><a id="linkblack" href="#/product/show/{{product.id_prod}}/{{product.name}}">{{product.name}}</a></b><br>
+							    				{{product.catname}},{{product.subname}}
+							    	</td>
+							    <td>	    				
+							    	<spam ng-if="product.promotion_stan=='no'" class="btn btn-success" disibled>{{product.price  | number:2 }} zł</spam>
+							    </td>
+				    		</tr>
+				    	</table>
+				    </ol>
+				    </div>
+				    <div role="tabpanel" class="tab-pane" id="promition"> 
+				    <ol>
+				    	<table class="table table-hover">		    
+				    		<tr  ng-repeat="product in products | orderBy : '-selled'"  ng-init="count=1"  ng-if="product.promotion_stan=='yes'"> 
+				    			<td  > <li><img id="img_place"   src="style/web/no-image.png"   ng-if="product.photo == ''"><img id="img_place"  src="photo/{{product.id_prod}}/{{product.photo}}"  ng-if="product.photo !=''"></li></td>
+							    <td id="name_product_box" class="pull left"><b><a id="linkblack" href="#/product/show/{{product.id_prod}}/{{product.name}}">{{product.name}}</a></b><br>
+							    				{{product.catname}},{{product.subname}}
+							    </td>
+							    <td>	    				
+							    	<spam ng-if="product.promotion_stan=='no'" class="btn btn-success" disibled>{{product.price  | number:2 }} zł</spam>
+							    	<spam ng-if="product.promotion_stan=='yes'" class="btn btn-success" disibled>{{product.newprice  | number:2 }} zł</spam>
+							    </td>
+				    		</tr >
+				    	</table>
+				    </ol>
+				    </div>
+				  </div>
+
+		</div>
+</div>
+<div class="col-xs-6" id="table_div_left" style="background-image: url('web/subtle_surface.png');">
+	<div id="notist_div">
+		<div id="news_segment">
+			<div style="float: left;">Nowy Sklep otwarty</div>
+			<div style="float: right;"><b>1 września  2016</b></div>
+		</div>	
+		<div id="news_segment">
+			<div style="float: left;">Najlepsze produkty dostępne  </div>
+			<div style="float: right;"><b>12 grudnia  2016</b></div>
+		</div>	
+	</div>
+</div>
+
+
+
+

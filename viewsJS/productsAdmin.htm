@@ -1,0 +1,61 @@
+<div class="row">
+  <div class="col-md-6">
+    <input type="text" class="form-control" ng-model="Product" placeholder="szukaj Produktu">
+  </div>
+  <div class="col-md-6 btn btn-default"><a id="linkblack" href="#/adminsection/addproduct/">Dodaj Produkt</a></div>
+</div>
+<div  ng-repeat="product in products | filter:Product">
+              <div  id="DIV_product" class="col-md-12">
+                   <div class="row">
+                      <div class="col-md-3">
+                          <img   src="style/web/no-image.png"      ng-if="product.photo == ''"  class="img-thumbnail pull-left" style="width:200px; height:250px; ">
+                          <img   src="photo/{{product.id_prod}}/{{product.photo}}"   ng-if="product.photo !=''"   class="img-thumbnail pull-left" style="width:200px; height:250px;">
+                      </div>
+                      <div class="col-md-7">
+                            <div class="row">
+                                <div class="col-md-7">
+                                     <h1><a id="linkblack" href="#/product/showEdit/{{product.id_prod}}/{{product.name}}">{{product.name}}</a></h1>
+                                </div>  
+                                <div ng-if="product.selled>1000"  class="col-md-3">
+                                      <h1 class="btn btn-info">Bestseler</h1>
+                                </div>            
+                                <div ng-if="product.promotion_stan=='yes'" class="col-md-2">
+                                      <h1  id="procent" class="btn btn-info">- {{product.procentptomo}} %</h1>
+                                </div>
+                             </div>
+                                	<table class="table table-responsive pull-left" style="width:350px;">
+						       			<tr>
+						       				<td class="active">Sprzedanych</td>
+						       				<td class="info">{{product.selled}}</td>
+						       				
+						       			</tr>
+
+						   
+						       			<tr>
+						       				<td class="active">W sklepie</td>
+						       				<td class="success" ng-if="product.stancount>5">{{product.stancount}} sztuki</td>
+						       				<td class="danger" ng-if="product.stancount<5">{{product.stancount}} sztuki</td>
+						       			</tr>
+						       			<tr>
+						       				<td class="active">Billasns</td>
+						       				<td class="success" ng-if="product.bilans>0 ||  product.bilans==0">{{product.bilans | number:2}} zł</td>
+						       				<td class="danger" ng-if="product.bilans<0">{{product.bilans | number:2}} zł </td>
+						       			</tr>
+						       		</table>
+                      </div>
+                      <div class="col-md-2" style="text-align:center;">
+                          <h1 class="btn btn-info col-md-12" >Ocena {{product.rating}}</h1>
+                          <h1 ng-if="product.promotion_stan=='yes'" class="btn btn-success pull-right btn-lg">{{product.newprice | number:2}} zł <br><s style="font-size:15px;">{{ product.price | number:2}} zł</s></h1> 
+                          <h1 ng-if="product.promotion_stan!='yes'" class="btn btn-success pull-right btn-lg">{{product.price | number:2}} zł</h1>      
+                      </div>           
+                   </div>
+              </div>
+
+
+
+</div>
+<style>
+  #DIV_product{
+    margin-left:0%;
+  }
+</style>

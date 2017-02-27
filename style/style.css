@@ -1,0 +1,281 @@
+#banner{
+	margin-top: -20px;
+	height: 350px;
+	background-color: 
+}
+	#view{
+		position: relative;
+        background-image: url('web/chruch.png');
+        margin: 10px;
+        padding: 20px;
+    }
+    .form_add{
+    	margin: 10px;
+    }
+#img_baner{
+	margin-top: 15px; 
+}
+.formEdition{
+	width: 100%;
+	height: 500px;
+}
+.tableHed{
+		padding: :10px;
+		text-transform: uppercase;
+	}
+	#mount{
+		border: 2px solid #6699cc; 
+		margin:10px;
+	}
+	#diliver_section{
+		margin: 15px;
+	}
+	#hedTable{
+		color: white;
+		padding: 10px;
+		background-color: #6699cc;
+	}
+	#divIsiteLopp{
+		background-color: white;
+	}
+.formpadding{
+		margin-top: 5px;
+		margin-bottom: 5px;
+}
+.hed_item,.hed_item_empty{
+	border-radius: 0px;
+	border:0px solid black; 
+}
+	.textopinion{
+		margin:5px;
+	}
+	.opinionform{
+		margin-top: 10px;
+	}
+	.opinion,.opinionItem{
+		margin-top: 10px;
+		padding: 10px;
+		background-color: #ccccff;
+		border-radius: 5px;
+	}
+#button_banner{
+	color: white;
+	background-color: #777;
+	margin: 2px;
+	border-radius: 0px;
+}
+#nav{
+	border-radius: 0px;
+}
+#registration_erors{
+	width: 80%;
+	margin-left: 10%;
+
+}
+#insite_DIV_radios,#insite_DIV_sum{
+    padding: 20px;
+  }
+#insite_DIV_sum{
+	padding: 50px;
+}
+ .number_buttoon{
+	width: 35px;
+	padding: 0px; 
+}
+.hed_item,.hed_item_empty{
+	border-radius: 0px;
+	border:0px solid black; 
+}
+.hed_item_empty ,.nologin{
+	font-size: 20px;
+	letter-spacing: 10px;
+	padding: 20px;
+}
+.nologin{
+	letter-spacing: 0px;
+}
+.item_loop,.item_loop_first,.item_loop_number{
+	background-color: white;
+	padding: 25px;
+}
+.item_loop_number{
+	padding:23px;
+}
+
+#news_segment{
+		background-color: white;
+		width: 100%;
+		height:20px;
+		padding-left: 5px;
+		padding-right:5px; 
+	}
+	#hed_news{
+		margin-top: -20px;
+		margin-bottom: -10px;
+		background-color: white;
+		color: black;
+	}
+	#notist_div{
+		margin-left: 15%;
+		background-color: #eee;
+		border:1px solid #777;
+		width: 70%;
+		height: 500px;
+	}
+	#table_div_left{
+		padding: 20px;
+		height: 700px;
+
+	}
+	#insite_DIV{
+		padding: 10px;
+	}
+	#loopDIV{
+		margin-left: 20%;
+		padding: 15px;
+	}
+	#view_table{
+		width: 500px;
+	}
+	#img_place{
+		width: 70px;
+		height: 70px;
+	}
+	#name_product_box{
+		margin:0px;
+	}
+	  #id_category{
+    background: red;
+  }
+  #pages{
+    padding: 20px;
+  }
+.number_buttoon{
+	width: 35px;
+	padding: 0px; 
+}
+.hed_item_empty ,.nologin{
+	font-size: 20px;
+	letter-spacing: 10px;
+	padding: 20px;
+}
+.nologin{
+	letter-spacing: 0px;
+}
+.item_loop,.item_loop_first,.item_loop_number{
+	background-color: white;
+	padding: 25px;
+}
+.item_loop_number{
+	padding:23px;
+}
+@media (max-width: 1360px) {
+	#cart_actions{
+		margin-left: -35px;
+		padding: 10px;
+	}
+}
+@media (max-width: 1950px) {
+	#cart_actions{
+		padding: 10px;
+	}
+}
+  #registration_title,#cart_title{
+  	width: 100%;
+  	text-align:center; 
+  	padding: 10px;
+  	background-color:#777; 
+  	color: white;
+  	font-size: 25px;
+  	text-transform: uppercase;
+  	letter-spacing:7px;
+  }
+  #insite_content,#registration_main_div,#cart_main_div{
+    background-image: url('web/subtle_surface.png');
+    min-height: 830px;
+  }
+  #cart_main_div{
+  	background-image: none;
+  }
+  #registration_main_div,#cart_main_div{
+  	margin-top: 3%;
+  	margin-left: 20%;
+  	width: 60%;
+  	min-height: 500px;
+  	margin-bottom: 4%;
+  }
+  #link,#link:hover,#linkblack,#linkblack:hover{
+    color: white;
+    text-decoration: none;
+  }
+  #linkblack,#linkblack:hover{
+  	color: black;
+  }
+  #scherch_div_result,#DIV_product{
+    background-color: #eee;
+    padding: 20px;
+  } 
+  #products_discrption{
+    margin-top: 80px;
+  }
+  #manu_shop{
+    margin-top: 85px;
+  }
+  #search_form{
+    border-radius: 20px 20px 20px 20px;
+     background-image: url('web/subtle_surface.png'); 
+    padding: 30px;
+  }
+	#name_sharch{
+		margin-left: 10px;
+	}
+	#action_button_shearch{
+		border-radius: 0px;
+		margin-left: 5px;
+	}
+  #button_category,#button_category_sub{
+    border-radius: 0px;
+    margin: 5px;
+    width: 100%;
+  }
+  #button_category_sub{
+  	text-transform: uppercase;
+      margin-left: 10%;
+      width: 80%;
+  }
+  	#insite{
+		background-image: url('web/dvsup.png');
+		padding: 0px;
+	}
+	body{
+		background-image: url('web/paper_fibers.png');
+	}
+	#menu_product{
+		border-radius: 0px;
+		width: 100%;
+		height: 100%;
+		margin-top: 60px; 
+		text-align:right;
+	}
+	#down_hed_section{
+		text-align:center;
+		margin-top: 10px; 
+	}
+	#procent{
+		text-align: center;
+	}
+	#DIV_product{
+		margin-left:10%;
+	}
+		#submit_registration{
+		margin-top: 35px;
+		letter-spacing:10px;text-transform: uppercase;
+	}
+	#form_elment{
+
+		text-align:center;margin-top: 35px;
+	}
+	#form{
+		margin-top: 20px;
+		padding:10px; margin-left:50px; margin-right:50px;
+	}

@@ -1,0 +1,212 @@
+<div id="insite_DIV" class="row">
+		<div  class="col-md-2" ng-include="navBar()">menu</div>
+		<div id="view" class="col-md-9">
+			<div class="row upheder">
+				<div class="col-md-4"></div>
+ 				<div class="col-md-4 hedOrder">
+ 					Zamuwenie nr {{orders[0].id}} 		
+				</div>
+  				<div class="col-md-4">{{orders[0].time * 1000 | timestampToDate}}</div>
+			</div>
+			<div class="row">
+				<div class="col-md-2 progresInfo">Postep twojego zamuwnia</div>
+				<div ng-if="orders[0].stan==0" class="col-md-8">
+	  				<div id="progresbarDIV">
+	  					<div id="text">Przyjęte do realizacji (20 %)</div>
+	  					<div style="background-color: green; width:20%;" id="progrss"></div>
+	  				</div>
+				</div>
+				<div ng-if="orders[0].stan==1" class="col-md-8">
+	  				<div id="progresbarDIV">
+	  					<div id="text">Rozpoczęto realizację (40 %)</div>
+	  					<div style="background-color: green; width:40%;" id="progrss"></div>
+	  				</div>
+				</div>
+				<div ng-if="orders[0].stan==2" class="col-md-8">
+	  				<div id="progresbarDIV">
+	  					<div id="text">Przekazano do wysyłki (60 %)</div>
+	  					<div style="background-color: green; width:60%;" id="progrss"></div>
+	  				</div>
+				</div>
+				<div ng-if="orders[0].stan==3" class="col-md-8">
+	  				<div id="progresbarDIV">
+	  					<div id="text" style="left: 35%;">Wysłano (80 %)</div>
+	  					<div style="background-color: green; width:80%;" id="progrss"></div>
+	  				</div>
+				</div>
+				<div ng-if="orders[0].stan==4" class="col-md-8">
+	  				<div id="progresbarDIV">
+	  					<div id="text" style="left: 30%;">Zralizowano (100 %)</div>
+	  					<div style="background-color: green; width:100%; " id="progrss"></div>
+	  				</div>
+				</div>
+				<div ng-if="orders[0].stan==5"  ng-click="changestaus(orders)" class="col-md-8">
+	  				<div id="progresbarDIV">
+	  					<div id="text" style="left: 40%;">Anulowano</div>
+	  					<div style="background-color: red; width:100%; " id="progrss"></div>
+	  				</div>
+				</div>
+
+				<div class="col-md-2"></div>
+			</div>
+			<h1>Zamuwione Produkty</h1>
+					<div class="col-md-12" id="orders_mian_div">
+					<div  id="cartViewSum" class="row">
+						<div class="col-md-5 hed_item btn btn-primary" >Nazwa</div>
+	  					<div class="col-md-1 hed_item btn btn-primary" >Ilosc</div>
+	  					<div class="col-md-3 hed_item btn btn-primary" >Cena</div>
+	  					<div class="col-md-3 hed_item btn btn-primary" >Razem</div>
+	  				</div>
+					<div ng-repeat="item in orders[0].items">
+						<div class="row">
+							<div class="col-md-5 item_loop" ><a id="linkblack" href="#/product/show/{{item.id_prod}}/{{item.name}}">{{item.name}}</a></div>
+							<div class="col-md-1 item_loop_number" >
+		  					<center>
+		  						{{item.qty}}
+		  					</center>
+		  					</div>
+		  					<div class="col-md-3 item_loop"  ng-if="item.promotion_stan=='no'"><center>{{item.qty}}  * {{item.price | number:2}} zł</center></div>
+		  					<div class="col-md-3 item_loop"  ng-if="item.promotion_stan=='no'" ><center>{{item.qty*item.price| number:2 }} zł</center></div>
+		  					<div class="col-md-3 item_loop"  ng-if="item.promotion_stan=='yes'"><center>{{item.qty}}  * {{item.newprice | number:2}} zł</center></div>
+		  					<div class="col-md-3 item_loop"  ng-if="item.promotion_stan=='yes'" ><center>{{item.qty*item.newprice| number:2 }} zł</center></div>
+						</div>
+					</div>
+					<div class="row" style="border-top:1px solid black;">
+				  		<div ng-if="orders[0].diiverchused=='reception'" class="col-md-12 item_loop" >
+				  			<div class="col-md-10 pull-left" ><strong>Wybrana Płatnosc Płatnosc przy odbiorze</strong></div>
+				  			<div class="col-md-2 pull-right" ><strong>{{6 | number:2}} zł</strong></div>
+				  		</div>
+				  		<div ng-if="orders[0].diiverchused=='transfer'" class="col-md-12 item_loop" >
+				  			<div class="col-md-10 pull-left" ><strong>Wybrana Płatnosc Przelew bankowy</strong></div>
+				  			<div class="col-md-2 pull-right" ><strong>{{3 | number:2}} zł</strong></div>
+				  		</div>
+					</div>
+					<div class="row">
+				  		<div ng-if="orders[0].sent=='courier'" class="col-md-12 item_loop" >
+				  			<div class="col-md-10 pull-left" ><strong>Wybrana Wysłka Przesyłka kurierska</strong></div>
+				  			<div class="col-md-2 pull-right" ><strong>{{16 | number:2}} zł</strong></div>
+				  		</div>
+				  		<div ng-if="orders[0].sent=='mail'" class="col-md-12 item_loop" >
+				  			<div class="col-md-10 pull-left" ><strong>Wybrana Wysłka Poczta Polskay</strong></div>
+				  			<div class="col-md-2 pull-right" ><strong>{{10 | number:2}} zł</strong></div>
+				  		</div>
+				  		<div ng-if="orders[0].sent=='bymyself'" class="col-md-12 item_loop" >
+				  			<div class="col-md-10 pull-left" ><strong>Wybrana Wysłka Odbir Osobisty</strong></div>
+				  			<div class="col-md-2 pull-right" ><strong>{{0 | number:2}} zł</strong></div>
+				  		</div>
+					</div>
+					<div class="row" style="border-top:1px solid black;">
+		  				<div  class="col-md-12 item_loop" >
+		  					<div class="col-md-8 pull-left" ><strong>Do zapłaty</strong></div>
+		  					<div class="col-md-4 pull-right" ><strong>{{orders[0].total | number:2}} zł</strong></div>
+		  				</div>
+					</div>
+						
+
+				</div>
+				<div class="row" style="border-top:1px solid black;"></div>
+				<h1>Dane Adresowe</h1>
+				<dl class="dl-horizontal">
+							<div  id="loopDIV">								
+								  <dt>Imie i Nazwiko</dt>
+								  <dd>{{adressID[0].name}}</dd>
+								  <dd>{{adressID[0].surname}}</dd>
+								  <br><br>
+								  <dt>Miejscowość Ulica</dt>
+								  <dd>{{adressID[0].city}}</dd>
+								  <dd>{{adressID[0].adress}}</dd>
+								   <br><br>
+								  <dt>Województwo</dt>
+								  <dd>{{adressID[0].region}}</dd>
+								   <br><br>
+								 
+								  <dt>Kod Pocztwy</dt>
+								  <dd>{{adressID[0].postCode}}</dd>
+								   <br><br>
+								  <dt>Telefon kontaktowy</dt>
+								  <dd>{{adressID[0].tele}}</dd>
+							</div>
+						</dl>
+					<div ng-if="orders[0].diiverchused=='transfer' && orders[0].paid==0">
+						<h1>Dane do przelewu</h1>
+						<dl class="dl-horizontal">
+							<div  id="loopDIV">		
+									  <dt>Nazwa Odbircy</dt>		
+									  <dd>Pani Biedronka</dd>
+									  <br><br>
+									  <dt>nr.rachnku</dt>
+									  <dd>123141541516778</dd>
+									   <br><br>
+									   <dt>Adress</dt>
+									   <dd>Biedronkowa 20 biedrnkowo</dd>
+									   <br><br>
+									  <dt>tytuł</dt>
+									  <dd>Zapłata za zakupy</dd>
+							</div>
+						</dl>
+					</div>
+					<div ng-if="orders[0].sent=='bymyself'">
+						<h1>Adress do odebrania paczki</h1>
+						<dl class="dl-horizontal">
+							<div  id="loopDIV">		
+								<dt>Adress</dt>
+								<dd>Biedronkowa 20 biedrnkowo</dd>
+							</div>
+							<center><b>Przy odbiorze tszeba pokazac dowód osobisty i podac numer zamuwnia</b></center>
+						</dl>
+					</div>
+			<div class="row">
+				<div class="col-md-6 pull-left" ><strong></strong></div>
+		  		<div class="col-md-6 pull-left" ><strong>aktualizacjia zamuwienia  {{orders[0].updata * 1000 | timestampToDate}}</strong></div>
+			</div>
+		</div>
+</div>
+
+<style type="text/css">
+
+.hed_item,.hed_item_empty{
+	border-radius: 0px;
+	border:0px solid black; 
+}
+
+	#orders_mian_div{
+		width: 80%;
+		margin-top: 5%;
+		margin-left: 10%;
+		background-color: white;
+		margin-bottom: 5%;
+	}
+	#view{
+        background-image: url('style/web/chruch.png');
+    }
+    .upheder{
+    	background-color: #336666;
+    	color: white;
+    	padding: 10px;
+    	margin-bottom: 10px;
+    	border-bottom: 2px solid red;
+    }
+    .hedOrder{
+    	font-size: 20px;
+    	text-transform: uppercase;
+    }
+    #progresbarDIV{
+    	background-color: gray;
+    	width:100%;
+    	height: 25px;
+    	position: relative;
+    }
+    #progrss{
+    	float: left;
+    	height: 100%;
+    	
+    }
+    #text{
+    	position: absolute;
+    	left: 25%;
+    	color: white;
+    }
+    .progresInfo{
+    	font-size: 10px;
+    }
+</style>

@@ -1,0 +1,38 @@
+<h2>Dodaj Produkt</h2>
+<form   name="editionform" novalidate>              
+                    <div class="row">
+                        <div class="col-md-6">
+                            <input type="text"  ng-model="editon.name" class="form-control" placeholder="Nazwa Produktu" required>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="number" ng-model="editon.number" min=0 value="editon.number" placeholder="Cena" class="form-control" required> 
+                        </div>
+                        <div class="col-md-1 btn btn-success btn-sm" style="margin: 5px;">
+                            zł
+                        </div>
+                    </div>
+                    <select class="form-control"  aria-label="ngSelected demo" ng-change="changesubcat(editon.id_category)" ng-model="editon.id_category" required>
+                            <option ng-repeat="cat  in category"  value="{{cat.id}}" ng-selected="cat.id==product[0].id_category" >
+                                {{cat.catname}}                                     
+                            </option>
+                    </select required>
+                    <select class="form-control"  aria-label="ngSelected demo" ng-change="changesetcategory(editon.id_subcategory)" ng-model="editon.id_subcategory" required>
+                            <option ng-repeat="catsub  in subcategory"  value="{{catsub.id}}" ng-selected="catsub.id==product[0].id_subcategory" >
+                                {{catsub.subname}}                              
+                            </option>
+                    </select >
+                    <textarea cols=100 rows=15 class="form-control" ng-model="editon.description_info" required placeholder="Opis podstawowy"></textarea>
+                    <textarea cols=100 rows=15 class="form-control" ng-model="editon.disrption" required placeholder="Opis szczegułowy"></textarea>
+                    <textarea cols=100 rows=15 class="form-control" ng-model="editon.TAG" placeholder="Tagi" required></textarea>
+                    <div class="row" style="margin-top:10px;">
+                        <div class="col-md-6"><h1>{{editon.name}}</h1>{{editon.catname}} / {{editon.subname}}</div>
+                        <div class="col-md-4" ></div>
+                        <div class="col-md-2 btn btn-success" >{{editon.number}} zł</div>
+                    </div>
+                        
+                    <div class="panel-body" ng-bind-html="editon.description_info"></div>
+                    <div class="panel-body" ng-bind-html="editon.disrption"></div>
+
+                    <button ng-if="editionform.$valid && !submitSAVE" type="submit" class="btn btn-primary btn-lg btn-block" ng-click="save(editon)" >Dodaj Produkt</button>
+                    <button ng-if="!editionform.$valid || submitSAVE" type="submit" class="btn btn-primary btn-lg btn-block" ng-click="save(editon)" disabled>Dodaj Produkt</button>
+                </form> 

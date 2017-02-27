@@ -1,0 +1,41 @@
+<div class="realitive">
+	<ul>
+		<h2 ng-click="addnewcategory()">Dodaj nową kategorie</h2>
+	</ul>
+	<ul ng-repeat="array in categoryArray">
+		<h2 ng-click="changecatname(array,$index)">{{array.name}}</h2>
+		<b ng-click="addsubcategory(array)">Dodaj nowy</b>
+		<li ng-click="changesubcatname(item)" ng-repeat="item in array.items">
+
+			{{item.subname}}
+		</li>
+	</ul>
+	
+</div>
+
+<div>
+	<button type="button" ng-click="saveChanges()" class="btn btn-primary btn-lg btn-block">Zapisz zmiany</button>
+</div>
+<style type="text/css">
+	.margin{
+		margin-top: 5px;
+		margin-bottom:5px;
+	}
+	.windowEdition{
+		padding: 10px;
+		width: 200px;
+		height: 150px;
+		position: absolute;
+		left: 50%;
+		top: 10%;
+		background-color: gray;
+		transform: translate(-50%,10%);
+
+	}
+	.realitive{
+		min-height: 150px;
+		position: relative;
+
+	}
+
+</style>

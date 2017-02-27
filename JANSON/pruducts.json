@@ -1,0 +1,56 @@
+[	
+	{
+
+		"name" : "Uncharted 3",
+		"photo":"",
+		"selled":5,
+		"price":234,
+		"time":15166621,
+		"promotion" :"no",
+		"categoty" :"Gry Konslowe , PS3",
+		"recomented" :1003
+	},
+	{
+		"name" : "Uncharted",
+		"photo":"photo/uncharted.jpg",
+		"selled":3,
+		"recomented" :314,
+		"time":151666,
+		"promotion" :"no",
+		"categoty" :"Gry Konslowe , PS3",
+		"price":234
+	},
+	{
+		"name" : "God of War",
+		"photo":"photo/god of war.jpg",
+		"selled":2,
+		"recomented" :3114,
+		"time":15166,
+		"promotion" :"yes",
+		"categoty" :"Gry Konslowe , PSP",
+		"price":211
+	},
+	{
+		"name" : "Tekken",
+		"photo":"",
+		"selled":1,
+		"recomented" :141,
+		"time":15166,
+		"promotion" :"yes",
+		"categoty" :"Gry Konslowe , PSX",
+		"price":35
+	},
+	{
+		"name" : "Trej Fiwer",
+		"photo":"photo/train.jpg",
+		"selled":6,
+		"recomented" :14,
+		"time":15166,
+		"promotion" :"yes",
+		"categoty" :"Gry komputerowe , PC",
+		"price":21
+	}
+		
+
+	
+]

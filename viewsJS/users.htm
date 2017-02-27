@@ -1,0 +1,6 @@
+<input type="text" class="form-control formpadding" ng-model="user" placeholder="szukaj urzytkownika">
+<div ng-repeat="user in users | filter:user">
+	<a href="#showUserAdmin/{{user.id_user}}" class="list-group-item">	
+		<p class="text-left">{{user.login}}</p>
+	</a>
+</div>

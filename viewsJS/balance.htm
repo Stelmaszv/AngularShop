@@ -1,0 +1,27 @@
+<input type="text" class="form-control formpadding" ng-model="user" placeholder="szukaj urzytkownika lub produktu">
+<div id="mount" ng-repeat="bilansloop in bilans |  orderBy : '-mount' |  orderBy : '-year' | filter:user" " >
+					<div id="hedTable">
+						{{bilansloop.mount | converttoMount}} {{bilansloop.year}} 
+					</div>
+					<table class="table table-bordered">
+						<tr id="hedTable">
+							<td>Uzytkownik</td>
+							<td>Nazwa</td>
+							<td>Cena</td>
+							<td>Ilosc</td>
+							<td>Suma</td>
+							<td>Data Operacji</td>
+						</tr>
+
+						<tr id="divIsiteLopp" ng-repeat="item in bilansloop.items  |  orderBy : '-time' " >
+							<td ><a id="linkblack" href="#showUserAdmin/{{item.user_id_by}}" >{{item.login}}</a></td>
+							<td><a  id="linkblack" href="#/product/show/{{item.id_prod}}/{{item.name}}" >{{item.name}}</a></td>
+							<td ng-if="item.byfirm==0" class="success">+ {{item.price | number:2}} zł</td>
+							<td ng-if="item.byfirm==1" class="danger">- {{item.price | number:2}} zł</td>
+							<td >{{item.count}} szt</td>
+							<td ng-if="item.byfirm==1" class="danger">- {{item.count * item.price | number:2}} zł</td>
+							<td ng-if="item.byfirm==0" class="success">+ {{item.count * item.price | number:2}} zł</td>
+							<td>{{item.time * 1000 | timestampToDate}}</td>
+						</tr>
+					</table>
+				</div>

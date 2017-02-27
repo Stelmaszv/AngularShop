@@ -1,0 +1,63 @@
+<div id="insite_DIV" class="row">
+    <div  class="col-md-2" ng-include="navBar()">menu</div>
+    <div id="view" class="col-md-9">
+		<form class="form-horizontal" name="formadd" data-ng-submit="save_address(address)" novalidate>
+		  <div class="form-group">
+		    <label for="inputEmail3" class="col-sm-2 control-label">Imie</label>
+		    <div class="col-sm-10">
+		      <input type="text" class="form-control" id="inputEmail3"  value="address[0].name" ng-model="address[0].name" placeholder="Imie" required>
+		    </div>
+		  </div>
+		  <div class="form-group">
+		    <label for="inputPassword3" class="col-sm-2 control-label">Nazwisko</label>
+		    <div class="col-sm-10">
+		      <input type="text" class="form-control" id="inputPassword3" value="address[0].surname" ng-model="address[0].surname" placeholder="Nazwisko" required>
+		    </div>
+		  </div>
+		  <div class="form-group">
+		    <label for="inputPassword3" class="col-sm-2 control-label">Ulica</label>
+		    <div class="col-sm-10">
+		      <input type="text" class="form-control" id="inputPassword3" value="address[0].adress" ng-model="address[0].adress" placeholder="Ulica na której mieszkasz" required >
+		    </div>
+		  </div>
+		  <div class="form-group">
+		    <label for="inputPassword3" class="col-sm-2 control-label">Kod Podcztowy</label>
+		    <div class="col-sm-10">
+		      <input type="text" class="form-control" id="inputPassword3" value="address[0].postCodes"  ng-model="address[0].postCode" placeholder="Kod Podcztowy" required>
+		    </div>
+		  </div>
+		  <div  class="form-group">
+		    <label for="inputPassword3" class="col-sm-2 control-label">Telefon</label>
+		    <div class="col-sm-10">
+		      <input type="text" class="form-control" id="inputPassword3"  integer value="address[0].tele"  ng-model="address[0].tele" placeholder="Twój telefon" required>
+		       <spam ng-show="adresserrs.phon" style="color: red;">To "{{address[0].tele}}" Nie poprawny  numer <b>numer  np.999999999</b></spam>
+		    </div>
+		  </div>
+		  <div class="form-group">
+		    <label for="inputPassword3" class="col-sm-2 control-label">Miasto</label>
+		    <div class="col-sm-10">
+		      <input type="text" class="form-control" id="inputPassword3"  value="address[0].city"  ng-model="address[0].city" placeholder="Twoje Miast" required>
+		    </div>
+		  </div>
+		  <div class="form-group">
+		    <label for="inputPassword3" class="col-sm-2 control-label">Województwo</label>
+		    <div class="col-sm-10">
+		      <input type="text" class="form-control" id="inputPassword3"  value="address[0].city"  ng-model="address[0].region" placeholder="Twoje Województwo" required>
+		    </div> 
+		  </div>
+
+		  <div class="form-group">
+		    <div class="col-sm-offset-2 col-sm-10">
+
+
+		      <button ng-show="!formadd.$valid" type="submit"  class="btn btn-primary btn-lg btn-block" disabled>Zapisz zmiany</button>
+		     
+			
+		      <button ng-show="formadd.$valid" type="submit"  class="btn btn-primary btn-lg btn-block">Zapisz zmiany</button>
+		     
+		    
+		    </div>
+		  </div>
+		</form>
+    </div>
+</div>

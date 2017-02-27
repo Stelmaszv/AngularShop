@@ -1,0 +1,29 @@
+
+	<ul class="nav nav-pills nav-justified">
+  	<li   role="presentation" >
+		 <div class="list-group">
+		  <a  ng-class="{active : isActive('/execution/1')}" ng-click="hederlink(1)"  class="list-group-item">
+		    <h4 class="list-group-item-heading">Dane Adresowe</h4>
+		    <p ng-if="!adresschused" class="list-group-item-text">Wubiesz dane do wsyłki</p>
+		    <p ng-if="adresschused" class="list-group-item-text"><spam class="glyphicon glyphicon-ok"></spam> Adress Wybrany </p>
+		  </a>
+		</div>
+	</li>
+  	<li  role="presentation" >
+  		<div class="list-group">
+			  <a ng-class="{active : isActive('/execution/2')}"  ng-click="hederlink(2)"  class="list-group-item">
+			    <h4 class="list-group-item-heading">Płatnosc i wysłka</h4>
+			    <p ng-if="!diiverchused || !setscuset  " class="list-group-item-text">Wybiesz formę płatnosc</p>
+			    <p ng-if="diiverchused && setscuset"  class="list-group-item-text"><spam class="glyphicon glyphicon-ok"></spam> Płatnosc wybrana</p>
+			  </a>
+		</div>
+	</li>
+  	<li role="presentation" >
+	  	<div class="list-group">
+		  <a ng-class="{active : isActive('/execution/3')}" ng-click="hederlink(3)"  class="list-group-item">
+		    <h4 class="list-group-item-heading">Padsumowanie</h4>
+		    <p class="list-group-item-text">Zakończnie</p>
+		  </a>
+		</div>
+	</li>
+	</ul>

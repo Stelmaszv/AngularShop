@@ -1,0 +1,34 @@
+<h2>Opinie do wystawenia </h2>
+<div class="list-group"  ng-repeat="ableopinion in ableopinions">
+	<a href="#/product/show/{{ableopinion.id_prod}}/{{ableopinion.name}}>{{ableopinion.name}}"   ng-class="{active : isActive('/setProfil/masagess')}" class="list-group-item">	{{ableopinion.name}}
+	</a>
+</div>
+<div ng-if="!ableopinions.length">
+	Brak Opini do wystawnia 
+</div>
+
+<div class="row"  ng-repeat="opinion in opinions">
+
+	<div class="col-md-1" ></div>
+	<div class="col-md-10 opinion" >
+		<div class="row" >
+					      					<div class="col-md-1" ></div>
+					      					<div class="col-md-8" ><b><a id="linkblack" href="#/product/show/{{opinion.id_prod}}/{{opinion.name}}">{{opinion.name}}</a></b> </div>
+					      					<div class="col-md-2" >
+					      						<b style="color: red;" ng-if="opinion.value<5">Ocena:{{opinion.value}}</b>
+					      						<b style="color: gold;" ng-if="opinion.value==5">Ocena:{{opinion.value}}</b>
+					      						<b style="color: green;" ng-if="opinion.value>5">Ocena:{{opinion.value}}</b>
+					      					</div>
+					      				</div>
+					      				<div class="row textopinion" >
+					      					<div class="col-md-1" ></div>
+					      					<div class="col-md-8" >
+					      						<p>{{opinion.text}}</p>
+					      					</div>
+					      				</div>
+					      				<p class="text-right">{{opinion.time * 1000 | timestampToDate}}</p>
+					      		
+
+					      			</div>
+					     
+					      		</div>

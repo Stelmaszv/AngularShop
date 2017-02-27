@@ -1,0 +1,95 @@
+<div id="cart_title" class="col-md-12">Koszyk</div>
+<br><br><br>
+
+	<div ng-if="errors.length" id="registration_erors">
+		<div  class="alert alert-danger" role="alert" >
+			<div ng-repeat="error in errors">
+				<b ng-if="error.stancount==0">Nie mamy juz produktu o nazwie "{{error.name}}"</b>
+				<b ng-if="error.stancount>0">Mamy tylko {{error.stancount}} sztuk   produktu o nazwie "{{error.name}}"</b>
+			</div>
+		</div>
+	</div>
+<div  id="cart_main_div">	
+		<div class="row">
+			<div class="col-md-5 hed_item btn btn-primary" >Nazwa</div>
+  			<div class="col-md-1 hed_item btn btn-primary" >Ilosc</div>
+  			<div class="col-md-3 hed_item btn btn-primary" >Cena</div>
+  			<div class="col-md-3 hed_item btn btn-primary" >Razem</div>
+  		</div>
+  		<form name="qtystan" style="border-bottom:1px solid black;">
+				<div ng-if="login" ng-repeat="product in cart">
+					<div ng-if="ifisinarray(product.name)">		
+
+						<div class="row" style="color:red;">
+		  					<div class="col-md-5 item_loop" ><a id="linkblack" href="#/product/show/{{product.id_prod}}/{{product.name}}">{{product.name}}</a> <spam class="glyphicon glyphicon-remove pull-right"></spam></div>
+		  					<div class="col-md-1 item_loop_number" >
+		  					<center >
+		  						<input ng-if="product.stancount==0" type="number"  name="valueqty" min="0" max="{{product.stancount}}" ng-change="set_qty(product,value)" ng-model="value.qty"  class="number_buttoon" value="{{product.qty}}" required>
+		  						<input ng-if="product.stancount>0" type="number"  name="valueqty" min="1" max="{{product.stancount}}" ng-change="set_qty(product,value)" ng-model="value.qty"  class="number_buttoon" value="{{product.qty}}" required>
+		  					</center>
+		  					</div>
+		  					<div ng-if="product.stancount==0">
+			  					<div class="col-md-3 item_loop" ><center>Brak towaru</center></div>
+			  					<div class="col-md-3 item_loop" ><center>Brak towaru <spam ng-click="remuve_item_form_cart(index)" class="glyphicon glyphicon-trash pull-right"></spam></center></div>
+		  					</div>
+		  					<div ng-if="product.stancount>0">
+		  						<div class="col-md-3 item_loop" ><center>{{product.qty}}  * {{product.price | number:2}} zł</center></div>
+		  						<div class="col-md-3 item_loop" ><center>{{product.qty*product.price| number:2 }} zł <spam ng-click="remuve_item_form_cart(index)" class="glyphicon glyphicon-trash pull-right"></spam></center></div>
+		  					</div>
+		  				</div>
+
+	  				</div>
+	  				<div ng-if="!ifisinarray(product.name)">			
+						<div class="row">
+		  					<div class="col-md-5 item_loop" ><a id="linkblack" href="#/product/show/{{product.id_prod}}/{{product.name}}">{{product.name}}</a></div>
+		  					<div class="col-md-1 item_loop_number" >
+		  					<center>
+		  						<input  type="number"  name="valueqty" min="1" max="{{product.stancount}}" ng-change="set_qty(product,value)" ng-model="value.qty"  class="number_buttoon" value="{{product.qty}}" required>
+		  					</center>
+		  					</div>
+		  					<div ng-if="product.promotion_stan=='no'" class="col-md-3 item_loop" ><center>{{product.qty}}  * {{product.price | number:2}} zł</center></div>
+		  					<div ng-if="product.promotion_stan=='yes'" class="col-md-3 item_loop" ><center>{{product.qty}}  * {{product.newprice | number:2}} zł</center></div>
+		  					<div ng-if="product.promotion_stan=='no'" class="col-md-3 item_loop" ><center>{{product.qty*product.price| number:2 }} zł <spam ng-click="remuve_item_form_cart(index)" class="glyphicon glyphicon-trash pull-right"></spam></center></div>
+		  					<div ng-if="product.promotion_stan=='yes'" class="col-md-3 item_loop" ><center>{{product.newprice| number:2 }} zł <spam ng-click="remuve_item_form_cart(index)" class="glyphicon glyphicon-trash pull-right"></spam></center></div>
+		  				</div>
+	  				</div>
+	  			</div>
+		</form>
+		<div ng-if="login" class="row">
+	  		<div ng-if="cart.length" class="col-md-12 item_loop" >
+	  			<div class="col-md-6 pull-left" ><strong>Do zapłaty</strong></div>
+	  			<div class="col-md-4 pull-right" ><strong>{{total | number:2}} zł</strong></div>
+	  		</div>
+	  	
+	  	</div>
+	  	<div class="row">
+				<div ng-if="!cart.length || !login" class=" col-md-12 btn btn-danger hed_item_empty" >Koszyk jest Pusty
+					<li ng-if="!login" class="nologin" >Musisz sie zalogowac by muc dokonywac zakpów</li>
+				</div>
+			</div>
+	  	<div id="cart_actions">
+			<div class="row">
+				<div class="col-md-4"><button ng-if="cart.length" type="button" ng-click="empty_cart()" class="btn btn-warning btn-lg">Opróżnij koszyk</button></div>
+				<div class="col-md-4"><a id="link" class="btn btn-primary btn-lg" href="#allproducts">Kontynuj zakupy</a></div>
+				<div class="col-md-4"><button ng-if="cart.length && login" type="button" ng-click="relizeOreder()" class="btn btn-success btn-lg">Zrealizuj zamówienie</button></div>
+			</div>
+		</div>
+	  		
+			
+		</div>
+		
+
+</div>
+
+<style>
+
+
+.hed_item,.hed_item_empty{
+	border-radius: 0px;
+	border:0px solid black; 
+}
+
+
+
+</style>
+

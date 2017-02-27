@@ -1,0 +1,55 @@
+<div class="col-md-12 sumary" >
+W Dziekujemy za dokonie zakupu w naszym sklepie
+</div>
+
+
+<div id="insite_DIV_sum">
+<b>Paczka powinna dotrzeć do państwa w najkrótszym możliwym czasie<br><br>
+	Pozdrawiamy i życzymy miłego dnia 
+</b>
+	<div ng-if="diiverchused=='transfer'">
+		<h1>Dane do przelewu</h1>
+		<dl class="dl-horizontal">
+			<div  id="loopDIV">		
+					  <dt>Nazwa Odbircy</dt>		
+					  <dd>Pani Biedronka</dd>
+					  <br><br>
+					  <dt>nr.rachnku</dt>
+					  <dd>123141541516778</dd>
+					   <br><br>
+					   <dt>Adress</dt>
+					   <dd>Biedronkowa 20 biedrnkowo</dd>
+					   <br><br>
+					  <dt>tytuł</dt>
+					  <dd>Zapłata za zakupy</dd>
+			</div>
+		</dl>
+	</div>
+	<div ng-if="setscuset=='bymyself'">
+		<h1>Adress do odebrania paczki</h1>
+		<dl class="dl-horizontal">
+			<div  id="loopDIV">		
+				<dt>Adress</dt>
+				<dd>Biedronkowa 20 biedrnkowo</dd>
+			</div>
+			<b>Przy odbiorze tszeba pokazac dowód osobisty i podac numer zamuwnia</b>
+		</dl>
+	</div>
+	<div ng-click="OrederOver()" class="btn btn-success btn-lg btn-block">Zakoncz zakupy</div>
+</div>
+<style type="text/css">
+	#loopDIV{
+		margin-left: 0px;
+	}
+	b{
+		text-align:center; 
+	}
+	.sumary{
+	text-align: center;
+	letter-spacing: 5px;
+	padding: 10px;
+	background-color: #33cc33;
+	color: white;
+	border-bottom: 2px solid white; 
+}
+</style>

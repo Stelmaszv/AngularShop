@@ -1,0 +1,193 @@
+<div ng-init="init(1)">
+  <div class="col-md-2" ng-init="init(1)">
+    <div ng-repeat="categorys in category">
+        <div ng-if="categoryactual==categorys.catname">
+          <div id="button_category"  class="btn btn-default" ng-click="set_category(categorys.catname,categorys.id)">       
+              {{categorys.catname | srortstring}}            
+          </div>
+          
+            <div  ng-repeat="subcategory in subcategorys" >
+              <div  ng-if="subcategoryactual!=subcategory.subname" id="button_category_sub" ng-click="set_subcategory(subcategory.subname)" class="btn btn-default active">{{subcategory.subname}}</div>
+              <div ng-if="subcategoryactual==subcategory.subname"  id="button_category_sub"  ng-click="set_subcategory(subcategory.subname)" class="btn btn-default">{{subcategory.subname}}</div>
+            </div>
+        </div>
+        <div ng-if="categoryactual!=categorys.catname"  id="button_category" class="btn btn-default active"  ng-click="set_category(categorys.catname,categorys.id)">{{categorys.catname | srortstring}}</div>
+
+    </div>
+
+  </div>
+
+    <div class="col-md-10" >
+        <div class="col-md-12"  id="search_form">
+              <form class="form-horizontal">
+                 <div class="form-group">
+                      <input type="text" class="form-control pull-left" ng-keyup="search_scope(keywords)" id="form_text" ng-model="keywords" placeholder="szukaj">
+                  </div>
+                  
+              </form>
+     
+              <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                    <div class="panel panel-default">
+                      <div class="panel-heading" role="tab" id="headingOne">
+                        <h4 class="panel-title">
+                          <a role="button" data-toggle="collapse" data-parent="#accordion" href="/#allproducts/#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            Szukaj według ceny
+                          </a>
+                        </h4>
+                      </div>
+                      <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                        <div class="panel-body">
+                          <center>
+                                Cena Od <input ng-model="prizefor" ng-change="prizeforfunction(prizefor)" type="number" >
+                                Cena Do <input ng-model="prizedo"  ng-change="prizefunctiondo(prizedo)"   type="number" >
+                                <button type="button" ng-click="serchbetwescope()">szukaj</button>
+                          </center>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="panel panel-default">
+                      <div class="panel-heading" role="tab" id="headingTwo">
+                        <h4 class="panel-title">
+                          <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="/#allproducts/#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                             <div ng-if="categoryactual"> Kryteria wyszukiwanie dla kategori {{categoryactual}}</div>
+                             <div ng-if="!categoryactual"> Kryteria wyszukiwanie dla kategori <label>Nie wybrano Kategori</label></div>
+                          </a>
+                        </h4>
+                      </div>
+                      <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                        <div class="panel-body">
+                            <div ng-if="categoryactual" ng-include="search_criteria()"></div>
+                            <div ng-if="!categoryactual"> Kryteria wyszukiwanie dla kategori <label> Nie wybrano Kategori</label></div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="panel panel-default">
+                      <div class="panel-heading" role="tab" id="headingThree">
+                        <h4 class="panel-title">
+                          <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="/#allproducts/#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                              Aktualne Kryteria
+                          </a>
+                        </h4>
+                      </div>
+                      <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                        <div class="panel-body" >
+                            <div ng-if="prizefor==0 && prizefor==0 && !categoryactual && !subcategoryactual && !keyword" >
+                               Nie ustawiono żadnych kryterów
+                            </div>
+                             <li ng-if="prizefor>0 || prizefor>0">Wyszukowanie w Pszedziale cenowym od {{prizefor}} zł do {{prizedo}} zł </li>
+                             <li ng-if="prizefor>0">cena minalna                 :{{prizefor}} zł</li>
+                             <li ng-if="prizedo>0">cena maksumalny              :{{prizedo}} zł</li>
+                             <li ng-if="categoryactual">Katgoria            :{{categoryactual}}</li>
+                             <li ng-if="subcategoryactual">Pot kategoria     :{{subcategoryactual}}</li>
+                             <li ng-if="keyword">Słowo kluczowe              :{{keyword}}</li>
+                        </div>
+                      </div>
+                    </div>
+              </div>
+         </div>
+         <div id="insite_content">
+        	 <div class="panel-body" ng-repeat="product in products">
+
+              <div  id="DIV_product" class="col-md-12">
+                   <div class="row">
+                      <div class="col-md-3">
+                          <img   src="style/web/no-image.png"      ng-if="product.photo == ''"  class="img-thumbnail pull-left" style="width:200px; height:250px; ">
+                          <img   src="photo/{{product.id_prod}}/{{product.photo}}"   ng-if="product.photo !=''"   class="img-thumbnail pull-left" style="width:200px; height:250px;">
+                      </div>
+                      <div class="col-md-7">
+                            <div class="row">
+                                <div class="col-md-7">
+                                     <h1><a id="linkblack" href="#/product/show/{{product.id_prod}}/{{product.name}}">{{product.name}} </a></h1>
+                                </div>  
+                                <div ng-if="product.selled>1000"  class="col-md-3">
+                                      <h1 class="btn btn-info">Bestseler</h1>
+                                </div>            
+                                <div ng-if="product.promotion_stan=='yes'" class="col-md-2">
+                                      <h1  id="procent" class="btn btn-info">- {{product.procentptomo}} %</h1>
+                                </div>
+                             </div>
+                                <b  ng-bind-html="product.description_info"></b>
+                      </div>
+                      <div class="col-md-2" style="text-align:center;">
+                          <h1 class="btn btn-info col-md-12" >Ocena {{product.rating}}</h1>
+                          <h1 ng-if="product.promotion_stan=='yes'" class="btn btn-success pull-right btn-lg">{{product.newprice | number:2}} zł <br><s style="font-size:15px;">{{ product.price | number:2}} zł</s></h1> 
+                          <h1 ng-if="product.promotion_stan!='yes'" class="btn btn-success pull-right btn-lg">{{product.price | number:2}} zł</h1>      
+                      </div> 
+
+                       <div id="menu_product" class="col-md-12 pull-right ">
+                            <div ng-if="product.stancount>0 && product.accessiblelevel==0">
+                              <button  ng-if="product.WLIST=='nie' "   ng-click="wishList(product)"  type="button" style="border-radius: 0px;" class="btn btn-success btn"><spam class="glyphicon glyphicon-heart"></spam> Dodaj do listy Życzeń </button>
+                              <button disabled ng-if="product.WLIST!='nie'"  type="button" style="border-radius: 0px;" class="btn btn-success btn"><spam class="glyphicon glyphicon-heart"></spam> Jest na liscie </button>
+                              <button  type="button" style="border-radius: 0px;" class="btn-warning btn">Dostępność Ograniczona</button>
+                              <button ng-if="!chcekcart(product)" type="button" style="border-radius: 0px;" class="btn btn-success btn" ng-click="add_to_cart(product)">
+                              Do koszyka <spam class="glyphicon glyphicon-shopping-cart"></spam></button>
+                             <button ng-if="chcekcart(product)" type="button" style="border-radius: 0px;" class="btn btn-success btn" ng-click="add_to_cart(products)" disabled>
+                              W koszyku <spam class="glyphicon glyphicon-shopping-cart"></spam></button>
+                            </div>
+                            <div ng-if="product.stancount>0 && product.accessiblelevel>0">
+                              <button  ng-if="product.WLIST=='nie'"  ng-click="wishList(product)" type="button" style="border-radius: 0px;" class="btn btn-success btn"><spam class="glyphicon glyphicon-heart"></spam> Dodaj do listy Życzeń </button>
+                              <button disabled ng-if="product.WLIST!='nie'"  type="button" style="border-radius: 0px;" class="btn btn-success btn"><spam class="glyphicon glyphicon-heart"></spam> Jest na liscie </button>
+                              <button  type="button" style="border-radius: 0px;" class="btn btn-success btn">Dostepny wysłka w 24 h</button>
+                              <button ng-if="!chcekcart(product)" type="button" style="border-radius: 0px;" class="btn btn-success btn" ng-click="add_to_cart(product)">
+                              Do koszyka <spam class="glyphicon glyphicon-shopping-cart"></spam></button>
+                              <button ng-if="chcekcart(product)" type="button" style="border-radius: 0px;" class="btn btn-success btn" ng-click="add_to_cart(products)" disabled>
+                              W koszyku <spam class="glyphicon glyphicon-shopping-cart"></spam></button>
+                            </div>
+                            <div ng-if="product.stancount==0 && product.accessiblelevel==2">
+                              <button  ng-if="product.WLIST=='nie'" ng-click="wishList(product)"  type="button" style="border-radius: 0px;" class="btn btn-success btn"><spam class="glyphicon glyphicon-heart"></spam> Dodaj do listy Życzeń </button>
+                              <button disabled ng-if="product.WLIST!='nie'"  type="button" style="border-radius: 0px;" class="btn btn-success btn"><spam class="glyphicon glyphicon-heart"></spam> Jest na liscie </button>
+                                <button  type="button" style="border-radius: 0px;" class="btn btn-warning btn">Oczekiwanie na dostawe</button>
+                            </div>
+                            <div ng-if="product.stancount==0 && product.accessiblelevel==1">
+                                <button  ng-if="product.WLIST=='nie'" ng-click="wishList(product)" type="button" style="border-radius: 0px;" class="btn btn-success btn"><spam class="glyphicon glyphicon-heart"></spam> Dodaj do listy Życzeń </button>
+                               <button disabled ng-if="product.WLIST!='nie'"  type="button" style="border-radius: 0px;" class="btn btn-success btn"><spam class="glyphicon glyphicon-heart"></spam> Jest na liscie</button>
+                                <button  type="button" style="border-radius: 0px;" class="btn btn-warning btn">Na zamówienie </button>
+                            </div>
+                            <div  ng-if="product.stancount==0 && product.accessiblelevel==0">
+                              <button  ng-if="product.WLIST=='nie'" ng-click="wishList(product)" type="button" style="border-radius: 0px;" class="btn btn-success btn"><spam class="glyphicon glyphicon-heart"></spam> Dodaj do listy Życzeń </button>
+                              <button disabled ng-if="product.WLIST!='nie'"  type="button" style="border-radius: 0px;" class="btn btn-success btn"><spam class="glyphicon glyphicon-heart"></spam> Jest na liscie </button>
+                              <button  type="button" style="border-radius: 0px;" class="btn btn-danger btn">Wypszedane</button>
+                            </div>
+                      </div>            
+                   </div>
+              </div>
+
+
+
+            </div>
+            <div class="col-md-12">
+              <div ng-if="!products.length" class="alert alert-danger" role="alert">
+                  nie znalziono żadnego produktu zpełniajace dane kryteria
+                  Twoje kryteria to 
+                  <li ng-if="prizefor>0 || prizefor>0">Wyszukowanie w Pszedziale cenowym od {{prizefor}} zł do {{prizedo}} zł </li>
+                  <li ng-if="prizefor>0">cena minalna                 :{{prizefor}} zł</li>
+                  <li ng-if="prizedo>0">cena maksumalny              :{{prizedo}} zł</li>
+                  <li ng-if="categoryactual">Katgoria            :{{categoryactual}}</li>
+                  <li ng-if="subcategoryactual">Pot kategoria     :{{subcategoryactual}}</li>
+                  <li ng-if="keyword">Słowo kluczowe              :{{keyword}}</li>
+              </div>
+            </div>
+          </div>
+    	<div id="">
+    		<div class="col-md-6" id="pages"  >
+    			<b ng-repeat="page in pages">     
+    				<spam ng-if="page.actual=='yes'" ng-click="setpage_scope(page.page)" class="btn btn-success">{{page.page}}</spam>
+    				<spam ng-if="page.actual=='no'"  ng-click="setpage_scope(page.page)" class="btn btn-default">{{page.page}}</spam>	
+    			</b>
+    		</div>
+    </div>
+  </div>
+<style>
+  #DIV_product{
+    margin-left:0%;
+  }
+  #menu_product{
+    border-radius: 0px;
+    width: 100%;
+    height: 100%;
+    margin-top: 0px; 
+    text-align:right;
+  }
+</style>
+
+

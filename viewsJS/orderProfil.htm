@@ -1,0 +1,21 @@
+<div class="list-group" ng-init="orersscope()">
+	<a href="#showOrder/{{order.id}}" ng-repeat="order in orders |  orderBy : '-time' " class="list-group-item"><b>Zamuwnie nr.{{order.id}}</b> ({{order.time * 1000 | timestampToDate}})
+			<b class="col-md-3 pull-right" ng-if="order.stan==0">Przyjęte do realizacji</b>
+			<b class="col-md-3 pull-right" ng-if="order.stan==1">Rozpoczęto realizację</b>
+			<b class="col-md-3 pull-right" ng-if="order.stan==2">Przekazano do wysyłki</b>
+			<b class="col-md-3 pull-right" ng-if="order.stan==3">Wysłano</b>
+			<b class="col-md-3 pull-right" ng-if="order.stan==4">Zralizowano</b>
+			<b class="col-md-3 pull-right" ng-if="order.stan==5">Anulowano</b>
+
+
+
+	</a>
+</div>
+<style type="text/css">
+	.loopelment{
+		margin: 5px;
+		background-color: #336666;
+		padding: 20px;
+		width: 100%;
+	}
+</style>

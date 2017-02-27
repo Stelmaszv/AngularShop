@@ -1,0 +1,82 @@
+<div id="insite_DIV" class="row">
+	<div  class="col-md-2" ng-include="navbaradmin()">menu</div>
+	<div id="view" class="col-md-9">
+		<div  id="nawmenu" class="row">
+			<div ng-click="set('UserInfo')"   ng-class="{ active : isActiveDiv( 'UserInfo' )      }"   class="col-md-3 btn btn-default">Dane Urzytkownika</div>
+			<div ng-click="set('AdressInfo')" ng-class="{ active : isActiveDiv( 'AdressInfo' )    }" class="col-md-3 btn btn-default">Dane Adressowe</div>
+			<div ng-click="set('OrdersInfo')" ng-class="{ active : isActiveDiv( 'OrdersInfo' )    }" class="col-md-3 btn btn-default">Dokonane Zamuwienia</div>
+			<div ng-click="set('OpinionInfo')" ng-class="{ active : isActiveDiv( 'OpinionInfo' )  }" class="col-md-3 btn btn-default">Wstawione Opinie</div>
+		</div>
+		<div ng-if="activeDIV=='UserInfo'">
+			<dl class="dl-horizontal">
+							<div  id="loopDIV">								
+								  <dt>Login</dt>
+								  <dd>{{user[0].login}}</dd>
+								  <br>
+								  <dt>Email</dt>
+								  <dd>{{user[0].email}}</dd>
+								  <br>
+								  <dt>Rola</dt>
+								  <dd>{{user[0].role}}</dd>
+								  <br>
+								  <dt>Ban</dt>
+								  <dd ng-if="user[0].ban==0">nie</dd>
+								  <dd ng-if="user[0].ban==1">tak</dd>
+
+							</div>
+			</dl>
+			<div class="row">
+				<div class="col-md-2"></div>
+				<div class="col-md-10">
+					<button type="button" class="btn btn-primary btn-lg btn btn-info" ng-click="changepermissions(user[0].role)">Zmien Uprawnienia</button>
+					<button ng-if="user[0].ban==0" type="button" ng-click="ban(user[0].ban)" class="btn btn-primary  btn-lg btn btn-danger">Zbanuj</button>
+					<button ng-if="user[0].ban==1" type="button" ng-click="ban(user[0].ban)" class="btn btn-primary btn-lg btn btn-danger">Zdejmij Bana</button>
+					<button type="button" class="btn btn-primary btn-lg btn btn-warning">Resetuj Hało</button>
+				</div>
+			</div>
+		</div>
+		<div ng-if="activeDIV=='AdressInfo'">			
+		<br>
+		<a ng-repeat="adres in address" href="#shoowadressID/{{adres.id}}" ng-class="{ active : adres.chiused=='yes' }" class="list-group-item">{{adres.name}} {{adres.surname}} </a>
+
+		</div>
+		<div ng-if="activeDIV=='OrdersInfo'">
+			<br>
+			<div ng-if="!serch" ng-repeat="order in Ordres |  orderBy : '-time'">
+				<a href="#showOrderAdmin/{{order.id}}" class="list-group-item">	
+					<b ng-if="order.time * 1000 | letestAdd">
+						<span class="label label-default">Nowy</span>
+					</b>
+				<b>Zamuwnie nr.{{order.id}}</b> (<b>{{order.login}}</b> {{order.time * 1000 | timestampToDate}})
+						<b class="col-md-3 pull-right" ng-if="order.stan==0">Przyjęte do realizacji</b>
+						<b class="col-md-3 pull-right" ng-if="order.stan==1">Rozpoczęto realizację</b>
+						<b class="col-md-3 pull-right" ng-if="order.stan==2">Przekazano do wysyłki</b>
+						<b class="col-md-3 pull-right" ng-if="order.stan==3">Wysłano</b>
+						<b class="col-md-3 pull-right" ng-if="order.stan==4">Zralizowano</b>
+						<b class="col-md-3 pull-right" ng-if="order.stan==5">Anulowano</b>
+				</a>
+			</div>
+		</div>
+		<div ng-if="activeDIV=='OpinionInfo'">
+				<div  ng-repeat="opinion in Opinions" class="opinion">
+					<div class="row" >
+					      					<div class="col-md-1" ></div>
+					      					<div class="col-md-8" ><b><a id="linkblack" href="#/product/show/{{opinion.id_prod}}/{{opinion.name}}">{{opinion.name}}</a></b> </div>
+					      					<div class="col-md-2" >
+					      						<b style="color: red;" ng-if="opinion.value<5">Ocena:{{opinion.value}}</b>
+					      						<b style="color: gold;" ng-if="opinion.value==5">Ocena:{{opinion.value}}</b>
+					      						<b style="color: green;" ng-if="opinion.value>5">Ocena:{{opinion.value}}</b>
+					      					</div>
+					 </div>
+					 <div class="row textopinion" >
+					      					<div class="col-md-1" ></div>
+					      					<div class="col-md-8" >
+					      						<p>{{opinion.text}}</p>
+					      					</div>
+					      				</div>
+					      				<p class="text-right">{{opinion.time * 1000 | timestampToDate}}</p>
+
+				</div>
+		</div>
+	</div>
+</div>

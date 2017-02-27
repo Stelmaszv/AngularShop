@@ -1,0 +1,324 @@
+<div id="insite_DIV" class="row">
+    <div  class="col-md-2" ng-include="navbaradmin()">menu</div>
+	    <div id="view" class="col-md-9">
+	    	<div  id="nawmenu" class="row">
+				<div ng-click="set('Edit')"   ng-class="{ active : isActiveDiv( 'Edit' )      }"   class="col-md-2 btn btn-default">Edycjia</div>
+				<div ng-click="set('Galery')"   ng-class="{ active : isActiveDiv( 'Galery' )      }"   class="col-md-2 btn btn-default">Galeria</div>
+				<div ng-click="set('management')" ng-class="{ active : isActiveDiv( 'management' )    }" class="col-md-3 btn btn-default">Zarządzanie</div>
+				<div ng-click="set('Bilans')" ng-class="{ active : isActiveDiv( 'Bilans' )    }" class="col-md-3 btn btn-default">Bilans</div>
+				<div ng-click="set('OpinionInfo')" ng-class="{ active : isActiveDiv( 'OpinionInfo' )  }" class="col-md-2 btn btn-default">Opinie</div>
+			</div>
+			<div ng-if="activeDIV=='Edit'">
+				
+				<form   name="editionform" novalidate>				
+					<div class="row">
+						<div class="col-md-6">
+							<input type="text"  ng-model="editon.name" class="form-control" required>
+						</div>
+						<div class="col-md-4">
+							<input type="number" ng-model="editon.number" min=0 value="editon.number" class="form-control" required> 
+						</div>
+						<div class="col-md-1 btn btn-success btn-sm" style="margin: 5px;">
+							zł
+						</div>
+					</div>
+					<select class="form-control"  aria-label="ngSelected demo" ng-change="changesubcat(editon.id_category)" ng-model="editon.id_category" required>
+							<option ng-repeat="cat  in category"  value="{{cat.id}}" ng-selected="cat.id==product[0].id_category" >
+								{{cat.catname}}										
+							</option>
+					</select required>
+					<select class="form-control"  aria-label="ngSelected demo" ng-change="changesetcategory(editon.id_subcategory)" ng-model="editon.id_subcategory" required>
+							<option ng-repeat="catsub  in subcategory"  value="{{catsub.id}}" ng-selected="catsub.id==product[0].id_subcategory" >
+								{{catsub.subname}}								
+							</option>
+					</select >
+					<textarea cols=100 rows=15 class="form-control" ng-model="editon.description_info" required></textarea>
+					<textarea cols=100 rows=15 class="form-control" ng-model="editon.disrption" required></textarea>
+					<textarea cols=100 rows=15 class="form-control" ng-model="editon.TAG" required></textarea>
+					<div class="row" style="margin-top:10px;">
+						<div class="col-md-6"><h1>{{editon.name}}</h1>{{editon.catname}} / {{editon.subname}}</div>
+						<div class="col-md-4" ></div>
+						<div class="col-md-2 btn btn-success" >{{editon.number}} zł</div>
+					</div>
+						
+					<div class="panel-body" ng-bind-html="editon.description_info"></div>
+					<div class="panel-body" ng-bind-html="editon.disrption"></div>
+					<div ng-repeat="photo in galery">
+						<img ng-if="photo==product[0].photo"  src="photo/{{product[0].id_prod}}/{{photo}}" ng-click="changeAvatar( photo , $index )" class="img-thumbnail pull-left" 
+						style="height:150px; border: 0.5px solid red; ">
+						<img ng-if="photo!=product[0].photo"  src="photo/{{product[0].id_prod}}/{{photo}}" ng-click="changeAvatar( photo , $index )" class="img-thumbnail pull-left" 
+						style="height:150px">
+						
+					</div>
+					<div ng-show="!galery.length">
+							<p class="text-center">Brak galeri dla tego produktu</p>
+					</div>
+					<button ng-if="editionform.$valid && !submitSAVE" type="submit" class="btn btn-primary btn-lg btn-block" ng-click="editionSave(editon)" >Zapisz Zmiany</button>
+					<button ng-if="!editionform.$valid || submitSAVE" type="submit" class="btn btn-primary btn-lg btn-block" ng-click="editionSave(editon)" disabled>Zapisz Zmiany</button>
+				</form>   
+			</div>
+			<div ng-if="activeDIV=='Galery'">
+			<div  >
+				<img ng-if="photo==product[0].photo" ng-repeat="photo in galery"   src="photo/{{product[0].id_prod}}/{{photo}}" ng-click="delImage( photo , $index,product )" class="img-thumbnail" 
+					style="height:150px; border: 0.5px solid red; ">
+				<img   ng-if="photo!=product[0].photo" ng-repeat="photo in galery"  src="photo/{{product[0].id_prod}}/{{photo}}" ng-click="delImage( photo , $index,product )" class="img-thumbnail" 
+				style="height:150px;">
+				
+			</div>
+			<div ng-show="!galery.length">
+					<p class="text-center">Brak galeri dla tego produktu</p>
+			</div>
+
+        <!-- Example: nv-file-select="" uploader="{Object}" options="{Object}" filters="{String}" -->
+       			 <input  class="btn btn-default" type="file" nv-file-select="" uploader="uploader" multiple  /><br/>
+
+
+		        <table class="table">
+		            <thead>
+		                <tr>
+		                    <th width="50%">Nazwa</th>
+		                    <th ng-show="uploader.isHTML5">Rozmiar</th>
+		                    <th ng-show="uploader.isHTML5">Postęp</th>
+		                    <th>Status</th>
+		                    <th>Akcjie</th>
+		                </tr>
+		            </thead>
+		            <tbody>
+		                <tr ng-repeat="item in uploader.queue">
+		                    <td>
+		                        <strong>{{ item.file.name }}</strong>
+		                        <div ng-show="uploader.isHTML5" ng-thumb="{ file: item._file, height: 100 }"></div>
+		                    </td>
+		                    <td ng-show="uploader.isHTML5" nowrap>{{ item.file.size/1024/1024|number:2 }} MB</td>
+		                    <td ng-show="uploader.isHTML5">
+		                        <div class="progress" style="margin-bottom: 0;">
+		                            <div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>
+		                        </div>
+		                    </td>
+		                    <td class="text-center">
+		                        <span ng-show="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
+		                        <span ng-show="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>
+		                        <span ng-show="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
+		                    </td>
+		                    <td nowrap>
+		                        <button type="button" class="btn btn-success btn-xs" ng-click="item.upload()" ng-disabled="item.isReady || item.isUploading || item.isSuccess">
+		                            <span class="glyphicon glyphicon-upload"></span> Upload
+		                        </button>
+		                        <button type="button" class="btn btn-warning btn-xs" ng-click="item.cancel()" ng-disabled="!item.isUploading">
+		                            <span class="glyphicon glyphicon-ban-circle"></span> Cancel
+		                        </button>
+		                        <button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
+		                            <span class="glyphicon glyphicon-trash"></span> Remove
+		                        </button>
+		                    </td>
+		                </tr>
+		            </tbody>
+		        </table>
+
+		        <div>
+		            <div>
+		                Queue progress:
+		                <div class="progress" style="">
+		                    <div class="progress-bar" role="progressbar" ng-style="{ 'width': uploader.progress + '%' }"></div>
+		                </div>
+		            </div>
+		            <button type="button" class="btn btn-success btn-s" ng-click="uploader.uploadAll()" ng-disabled="!uploader.getNotUploadedItems().length">
+		                <span class="glyphicon glyphicon-upload"></span> Upload all
+		            </button>
+		            <button type="button" class="btn btn-warning btn-s" ng-click="uploader.cancelAll()" ng-disabled="!uploader.isUploading">
+		                <span class="glyphicon glyphicon-ban-circle"></span> Cancel all
+		            </button>
+		            <button type="button" class="btn btn-danger btn-s" ng-click="uploader.clearQueue()" ng-disabled="!uploader.queue.length">
+		                <span class="glyphicon glyphicon-trash"></span> Remove all
+		            </button>
+		        </div>
+
+			</div>
+			<div ng-if="activeDIV=='OpinionInfo'">
+				<div class="row"  ng-repeat="opinion in opinions">
+				 	<div ng-click="deleteOpinion(opinion)">
+						<div class="col-md-1" ></div>
+						<div class="col-md-10 opinion" >
+						<div class="row" >
+						      					<div class="col-md-1" ></div>
+						      					<div class="col-md-8" ><b><a id="linkblack" href="#/product/show/{{opinion.id_prod}}/{{opinion.name}}">{{opinion.name}}</a> (<a id="linkblack" href="#showUserAdmin/{{opinion.id_user}}" >{{opinion.login}}</a>) </b> <b ng-if="opinion.banOpinion==1" style="color:red;">Zbanowana</b> </div>
+						      					<div class="col-md-2" >
+						      						<b style="color: red;" ng-if="opinion.value<5">Ocena:{{opinion.value}}</b>
+						      						<b style="color: gold;" ng-if="opinion.value==5">Ocena:{{opinion.value}}</b>
+						      						<b style="color: green;" ng-if="opinion.value>5">Ocena:{{opinion.value}}</b>
+						      					</div>
+						</div>
+						<div class="row textopinion" >
+						     <div class="col-md-1" ></div>
+						      <div class="col-md-8" >
+						      	<p>{{opinion.text}}</p>
+						      					</div>
+						</div>
+						    <p class="text-right">{{opinion.time * 1000 | timestampToDate}}</p>
+						  </div>
+					</div>
+				</div>
+			</div>
+			<div ng-if="activeDIV=='Bilans'">
+					<div id="mount" ng-repeat="bilans in bilansproduct |  orderBy : '-mount' |  orderBy : '-year'  "  >
+						<div id="hedTable">
+							{{bilans.mount | converttoMount}} {{bilans.year}} 
+						</div>
+						<table class="table table-bordered">
+							<tr id="hedTable">
+								<td>Uzytkownik</td>
+								<td>Nazwa</td>
+								<td ng-click="filtrBalance()">Cena</td>
+								<td>Ilosc</td>
+								<td >Suma</td>
+								<td>Data Operacji</td>
+							</tr>
+							<tr id="divIsiteLopp" ng-repeat="item in bilans.items  |  orderBy : '-time' "  ">
+								<td ><a id="linkblack" href="#showUserAdmin/{{item.user_id_by}}" >{{item.login}}</a></td>
+								<td><a  id="linkblack" href="#/product/show/{{item.id_prod}}/{{item.name}}" >{{item.name}}</a></td>
+								<td ng-if="item.byfirm==0" class="success">+ {{item.price | number:2}} zł</td>
+								<td ng-if="item.byfirm==1" class="danger">- {{item.price | number:2}} zł</td>
+								<td >{{item.count}} szt</td>
+								<td ng-if="item.byfirm==1" class="danger">- {{item.count * item.price | number:2}} zł</td>
+								<td ng-if="item.byfirm==0" class="success">+ {{item.count * item.price | number:2}} zł</td>
+								<td>{{item.time * 1000 | timestampToDate}}</td>
+							</tr>
+						</table>
+					</div>
+	    	</div>
+
+	    	<div id="diliver_section" ng-if="activeDIV=='management'">
+
+	    		<form  class="row">
+	    			<div ng-if="submit">
+							<div ng-click="submit=false" class="alert alert-success" role="alert">Dostawa wprowadzona <b ng-click="submit_set()">kliknij jesli chcesz dodac więcej</b></div>
+				    </div>	
+	    			<div ng-if="!submit">
+		    			<div class="col-md-4">
+		    				<b>Wprowadź Dostawę</b>
+		    			</div>
+						<div class="col-md-6">
+							<div class="row">
+								<div class="col-md-6">
+									Cena 
+									<input type="number" style="width: 50px;" ng-model="diliver.price">
+								</div>
+								<div class="col-md-6">
+									x Ilosc
+									<input type="number" style="width: 50px;"  ng-model="diliver.qty">
+								</div>
+							</div>
+						</div>
+						<div class="col-md-2">
+		    				<input class="btn btn-default" ng-click="adddiliver(diliver)" type="submit" value="Zatwiedz">
+		    			</div>
+						
+	    			</div>
+	    			<div ng-if="submitPromotion">
+	    					<br>
+	    					<br>
+							<div ng-if="submitPromotion" class="alert alert-success" role="alert">Promocjia Ustawiona 
+							<b ng-click="promotion_set()">kliknij jesli chcesz zmienic</b>
+							</div>
+				    </div>	
+	    			<div  ng-if="!submitPromotion">
+		    			<div class="col-md-4">
+			    				<b>Wprowadz Promocjie</b>
+			    		</div>    		
+		    			<div class="col-md-6">
+		    				<div class="row">
+		    					<div class="col-md-8">
+		    						<div  id="procent" class="btn btn-success">{{product[0].newprice | number:2}}  zł </div>
+		    						<div  id="procent" class="btn btn-info">{{product[0].procentptomo}} %</div>
+		    					</div>
+		    					<div class="col-md-4">
+		    						<select ng-change="changePromotin(product[0].price,procentpromo)" ng-model="procentpromo"  class="form-control">
+		    								<option value="0">Brak Promocji</option>
+		    								<option value="5">5 %</option>
+											<option value="10">10 %</option>
+											<option value="20">20 %</option>
+											<option value="30">30 % </option>
+											<option value="40">40 %</option>
+											<option value="60">60 %</option>
+											<option value="75">75 %</option>
+											<option value="85">85 %</option>
+											<option value="95">95 %</option>
+		    						</select>
+		    					</div>
+		    				</div>
+		    			</div>
+		    			<div class="col-md-2">
+	    					<input class="btn btn-default" ng-click="setPromotion()" type="submit" value="Zatwiedz">
+	    				</div>
+		    		</div>
+	    			
+				</form>
+				<div class="row" style="margin-top: 10px; margin-bottom: 10px;">
+					<div class="col-md-4">
+						<b>Zmien dostepnosc</b>
+					</div>
+					<div class="col-md-8">
+						<select ng-change="changeavailability(availability)" ng-model="availability"  class="form-control">
+							<option value="0">Drudno dostępne</option>
+							<option value="1">Na zamówienie</option>
+							<option value="2">Łatwo Dostępne</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-md-7">
+                                <div ng-if="product.selled>1000"  class="col-md-3">
+                                      <h1 class="btn btn-info">Bestseler</h1>
+                                </div>            
+                                <div ng-if="product.promotion_stan=='yes'" class="col-md-2">
+                                      <h1  id="procent" class="btn btn-info">- {{product[0].procentptomo}} %</h1>
+                                </div>
+                             </div>
+                                	<table class="table table-responsive pull-left">
+						       			<tr>
+						       				<td class="active">Sprzedanych</td>
+						       				<td class="info">{{product[0].selled}} sztuki</td>
+						       				
+						       			</tr>
+
+						   
+						       			<tr>
+						       				<td class="active">W sklepie</td>
+						       				<td class="success" ng-if="product[0].stancount>=5">{{product[0].stancount}} sztuki</td>
+						       				<td class="danger" ng-if="product[0].stancount<5">{{product[0].stancount}} sztuki</td>
+						       			</tr>
+						       			<tr>
+						       				<td class="active">Dostępnosc</td>
+						       				<td class="danger" ng-if="product[0].accessiblelevel==0 && product[0].stancount==5 ">Nie Dostępne</td>
+						       				<td class="danger" ng-if="product[0].accessiblelevel==0">Drudno dostępne</td>
+						       				<td class="warning" ng-if="product[0].accessiblelevel==1">Na zamówienie</td>
+						       				<td class="success" ng-if="product[0].accessiblelevel==2">Łatwo Dostępne</td>
+						       			</tr>
+						       			<tr>
+						       				<td class="active">Billasns</td>
+						       				<td class="success" ng-if="product[0].bilans>0 ||  product[0].bilans==0">{{product[0].bilans | number:2}} zł</td>
+						       				<td class="danger" ng-if="product[0].bilans<0">{{product[0].bilans | number:2}} zł </td>
+						       			</tr>
+						       		</table>
+                 </div>
+	    	</div>
+	   	</div>	
+</div>
+    <style>
+        .center-block {
+            float: none;
+        }
+
+        .my-drop-zone { border: dotted 3px lightgray; }
+        .nv-file-over { border: dotted 3px red; } /* Default class applied to drop zones on over */
+        .another-file-over-class { border: dotted 3px green; }
+        html, body { height: 100%; }
+        canvas {
+            background-color: #f3f3f3;
+            -webkit-box-shadow: 3px 3px 3px 0 #e3e3e3;
+            -moz-box-shadow: 3px 3px 3px 0 #e3e3e3;
+            box-shadow: 3px 3px 3px 0 #e3e3e3;
+            border: 1px solid #c3c3c3;
+            height: 100px;
+            margin: 6px 0 0 6px;
+        }
+    </style>

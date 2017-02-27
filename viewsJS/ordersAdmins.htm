@@ -1,0 +1,55 @@
+		<div class="row">
+		  <div class="col-md-4">
+		      <select  ng-model="serch" class="form-control formpadding">
+					<option value="">wszystkie</option>
+				  	<option value="0">Przyjęte do realizacji</option>
+				  	<option value="1">Rozpoczęto realizację</option>
+				  	<option value="2">Przekazano do wysyłki</option>
+				  	<option value="3">Wysłano</option>
+				  	<option value="4">Zralizowano</option>
+				  	<option value="5">Anulowano</option>
+				</select>
+			</div>
+			<div class="col-md-4">
+      			<input type="text" class="form-control formpadding" ng-model="user" placeholder="szukaj urzytkownika">
+      		</div>
+      	</div>
+
+
+<div ng-if="!serch" ng-repeat="order in oders |  orderBy : '-time' | filter : user">
+	<a href="#showOrderAdmin/{{order.id}}" class="list-group-item">	
+		<b ng-if="order.time * 1000 | letestAdd">
+			<span class="label label-default">Nowy</span>
+		</b>
+	<b>Zamuwnie nr.{{order.id}}</b> (<b>{{order.login}}</b> {{order.time * 1000 | timestampToDate}})
+			<b class="col-md-3 pull-right" ng-if="order.stan==0">Przyjęte do realizacji</b>
+			<b class="col-md-3 pull-right" ng-if="order.stan==1">Rozpoczęto realizację</b>
+			<b class="col-md-3 pull-right" ng-if="order.stan==2">Przekazano do wysyłki</b>
+			<b class="col-md-3 pull-right" ng-if="order.stan==3">Wysłano</b>
+			<b class="col-md-3 pull-right" ng-if="order.stan==4">Zralizowano</b>
+			<b class="col-md-3 pull-right" ng-if="order.stan==5">Anulowano</b>
+	</a>
+</div>
+<div  ng-if="order.stan==serch" ng-repeat="order in oders | orderBy : '-time' | filter : user">
+	<a href="#showOrderAdmin/{{order.id}}" class="list-group-item">	
+		<b ng-if="order.time * 1000 | letestAdd">
+			<span class="label label-default">Nowy</span>
+		</b>
+	<b> Zamuwnie nr.{{order.id}}</b> (<b>{{order.login}}</b>  {{order.time * 1000 | timestampToDate}})
+			<b class="col-md-3 pull-right" ng-if="order.stan==0">Przyjęte do realizacji</b>
+			<b class="col-md-3 pull-right" ng-if="order.stan==1">Rozpoczęto realizację</b>
+			<b class="col-md-3 pull-right" ng-if="order.stan==2">Przekazano do wysyłki</b>
+			<b class="col-md-3 pull-right" ng-if="order.stan==3">Wysłano</b>
+			<b class="col-md-3 pull-right" ng-if="order.stan==4">Zralizowano</b>
+			<b class="col-md-3 pull-right" ng-if="order.stan==5">Anulowano</b>
+	</a>
+</div>
+<div >
+<style type="text/css">
+	.loopelment{
+		margin: 5px;
+		background-color: #336666;
+		padding: 20px;
+		width: 100%;
+	}
+</style>

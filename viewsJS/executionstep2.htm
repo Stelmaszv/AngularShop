@@ -1,0 +1,72 @@
+<div id="insite_DIV">
+    <div ng-if="errorspaymnetdiliver">
+      <div class="alert alert-danger" role="alert">
+           <li ng-if="!diiver.name">nie wybrano płatnosci</li>
+           <li ng-if="!sent.name"> nie wybrano Wsyłki</li>
+      </div>
+    </div>
+   <div id="insite_DIV_radios">
+      <h1>Płatnosc 
+          <small ng-if="!diiver.name">nie wybrano</small>
+          <small ng-if="diiver.name">
+
+            <b ng-if="diiver.name=='transfer'"  style="color:green;">Przelew bankowy</b>
+            <b ng-if="diiver.name=='reception'" style="color:green;">Płatnosc przy odbiorze</b>
+          </small>
+
+       </h1>
+      <div class="row">
+        <div class="col-md-1">
+            <input type="radio" ng-model="diiver.name"  ng-change="errorspaymnetdiliver=false" value="transfer">
+        </div>
+        <div class="col-md-8 pull-left" >Przelew bankowy</div>
+        <div class="col-md-2 btn pull-right" style="color:green;" >{{3 | number:2}} zł</div>
+      </div>
+      <div class="row">
+        <div class="col-md-1">
+            <input type="radio" ng-model="diiver.name" ng-change="errorspaymnetdiliver=false" value="reception">
+        </div>
+        <div class="col-md-8 pull-left" >Płatnosc przy odbiorze</div>
+        <div class="col-md-2 btn  pull-right"  style="color:green;" >{{6 | number:2}} zł</div>
+      </div>
+
+   </div>
+   <div id="insite_DIV_radios">
+      <h1>Wsyłka 
+          <small ng-if="!sent.name"> nie wybrano</small>
+           <small ng-if="sent.name">
+                <b ng-if="sent.name=='courier'" style="color:green;">Przesyłka kurierska</b>
+                <b ng-if="sent.name=='mail'" style="color:green;">Poczta Polska</b>
+                <b ng-if="sent.name=='bymyself'" style="color:green;">Odbir Osobisty</b>
+           </small>
+      </h1>
+    <div class="row">
+      <div class="col-md-1">
+          <input type="radio" ng-model="sent.name" ng-change="errorspaymnetdiliver=false" value="courier">
+      </div>
+      <div class="col-md-8 pull-left" >Przesyłka kurierska</div>
+      <div class="col-md-2 pull-right"  style="color:green;" >{{16 | number:2}} zł</div>
+    </div>
+     <div class="row">
+      <div class="col-md-1">
+          <input type="radio" ng-model="sent.name" ng-change="errorspaymnetdiliver=false" value="mail">
+      </div>
+      <div class="col-md-8 pull-left" >Poczta Polska</div>
+      <div class="col-md-2 pull-right" style="color:green;" >{{10 | number:2}} zł</div>
+    </div>
+    <div class="row">
+      <div class="col-md-1">
+          <input type="radio" ng-model="sent.name" ng-change="errorspaymnetdiliver=false" value="bymyself">
+      </div>
+      <div class="col-md-8 pull-left" >Odbir Osobisty</div>
+      <div class="col-md-3 " style="color:green; text-transform: uppercase;" >Bez płatny</div>
+    </div>  
+  
+   </div>
+   <div ng-click="chusethispayment(sent,diiver)" class="btn btn-success btn-lg btn-block">Wybiesz ten Rodzaj Wysłki i Płatnosci</div>
+</div>
+<style type="text/css">
+    .row{
+    margin-top: 5px;
+  }
+</style>

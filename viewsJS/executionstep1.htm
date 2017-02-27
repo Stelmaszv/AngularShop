@@ -1,0 +1,33 @@
+<div id="insite_DIV">
+	<select class="form-control" aria-label="ngSelected demo"  ng-model="adreesSelect" ng-change="showchusedAdressScope(adreesSelect)">
+		<option ng-repeat="adres in adress"  value="{{adres.id}}" ng-selected="adres.chiused=='yes'">
+			{{adres.name}} {{adres.surname}} {{adres.adress}} {{adres.city}}																
+		</option>
+	</select>
+		<dl class="dl-horizontal">
+			<div ng-repeat="adres in adress" id="loopDIV" ng-if="adres.chiused=='yes'">		
+				  <dt>Imie i Nazwiko</dt>
+				  <dd>{{adres.name}}</dd>			
+				  <dd>{{adres.surname}}</dd>
+				  <br><br>
+				  <dt>Miejscowość Ulica</dt>
+				  <dd>{{adres.city}}</dd>
+				  <dd>{{adres.adress}}</dd>
+				   <br><br>
+				  <dt>Województwo</dt>
+				  <dd>{{adres.region}}</dd>
+				   <br><br>
+				 
+				  <dt>Kod Pocztwy</dt>
+				  <dd>{{adres.postCode}}</dd>
+				   <br><br>
+				  <dt>Telefon kontaktowy</dt>
+				  <dd>{{adres.tele}}</dd>
+				   <br><br>
+				  <dt>Wybrany</dt>
+				  <dd style="color:green;" ng-if="adresschused[0].id==adres.id">tak</dd>
+				  <dd style="color:red;" ng-if="adresschused[0].id!=adres.id">nie</dd>
+			</div>
+		</dl>
+	<div ng-click="chusethis()" class="btn btn-success btn-lg btn-block">Wybiesz ten Adress</div>
+</div>

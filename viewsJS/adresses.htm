@@ -1,0 +1,19 @@
+<div class="list-group" ng-init="adressScope()">
+	<a href="#addadress" class="list-group-item">Dodaj nowy</a>
+	<a ng-repeat="adres in adress" href="#shoowadressID/{{adres.id}}" ng-class="{ active : adres.chiused=='yes' }" class="list-group-item">{{adres.name}} {{adres.surname}} </a>
+</div>
+<style type="text/css">
+	.loop_elment_adress,.loop_elment_adress_active{
+		background-color: #bbbbbb;
+		color: white;
+		margin: 10px;
+	}
+	.loop_elment_adress_active{
+		background-color: #bbbbbb;
+		color: black;
+	}
+	.add_icon{
+		color: black;
+		background-color:#e0e0e0;
+	}
+</style>

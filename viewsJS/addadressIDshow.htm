@@ -1,0 +1,34 @@
+<div id="insite_DIV" class="row">
+    <div  class="col-md-2" ng-include="navBar()">menu</div>
+    <div id="view" class="col-md-9">
+    <div class="row">
+    	<div class="col-md-8"></div>
+    	<spam class="col-md-4">
+    		<button  class="btn btn-default" ng-if="address[0].chiused=='yes'">Główny</button>
+    		<button ng-click="set_as_Main()" class="btn btn-primary" ng-if="address[0].chiused!='yes'">Ustaw jako Główny</button>
+    		<a  href="#/addresseEition/{{address[0].id}}"  class="glyphicon glyphicon-pencil btn btn-primary"></a>
+    		<button   ng-click="deleteAdressSCope()" class="glyphicon glyphicon-glyphicon glyphicon-trash btn btn-primary"></button>
+    	</spam>
+    </div>
+		<dl class="dl-horizontal">
+			<div  id="loopDIV">								
+				<dt>Imie i Nazwiko</dt>
+				<dd>{{address[0].name}}</dd>
+				<dd>{{address[0].surname}}</dd>
+				<br><br>
+				<dt>Miejscowość Ulica</dt>
+				<dd>{{address[0].city}}</dd>
+				<dd>{{address[0].adress}}</dd>
+				<br><br>
+				<dt>Województwo</dt>
+				<dd>{{address[0].region}}</dd>
+				<br><br>							 
+				<dt>Kod Pocztwy</dt>
+				<dd>{{address[0].postCode}}</dd>
+				<br><br>
+				<dt>Telefon kontaktowy</dt>
+				<dd>{{address[0].tele}}</dd>
+			</div>
+		</dl>
+    </div>
+</div>

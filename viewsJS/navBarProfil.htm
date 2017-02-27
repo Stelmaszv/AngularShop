@@ -1,0 +1,9 @@
+<div class="list-group">
+  <a href="#setProfil/masagess"   ng-class="{active : isActive('/setProfil/masagess')}" class="list-group-item">Powadomenia</a>
+  <a href="#setProfil/opinions"   ng-class="{active : isActive('/setProfil/opinions')}" class="list-group-item">Moje opinie</a>
+  <a href="#setProfil/showadress" ng-class="{active : isActive('/setProfil/showadress')}" class="list-group-item">Dane Adresowe</a>
+  <a ng-if="isActive('/addadress')" href="#setProfil/showadress"     ng-class="{active : isActive('/addadress') }" class="list-group-item">Dodaj nowy adress</a>
+  <a href="#setProfil/WishList"   ng-class="{active : isActive('/setProfil/WishList')}" class="list-group-item">Lista Życzeń</a>
+  <a href="#setProfil/orders"     ng-class="{active : isActive('/setProfil/orders') && !isActive('/showOrder/{{orders[0].id}}')}" class="list-group-item">Historia zamuwień</a>
+  <a ng-if="id" href="#setProfil/orders"     ng-class="{active : isActive('/showOrder/{{id}}') }" class="list-group-item">Zauwnie nr {{orders[0].id}}</a>
+</div>

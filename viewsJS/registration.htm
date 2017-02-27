@@ -1,0 +1,63 @@
+<div id="registration_title" class="col-md-12">Rejestracja</div> 
+<br><br><br>
+<div ng-if="errors" id="registration_erors">
+	<div class="alert alert-danger" role="alert">
+		<b>Wystąpiły następujące błędy</b>
+		<li ng-if="!ifavailable && user.login">login <b>{{user.login}}</b> jest zajęty</li>
+		<li ng-if="!user.login">Pole login jest puste </li>
+		<li ng-if="!user.email">emial {{user.email}} nie jest poprawny np:<b>pszykła@pszykład.com</b></li>
+		<li ng-if="!password">Hasła nie sa takie same</li>
+	</div>
+</div>
+
+<div  id="registration_main_div" class="col-md-12">
+	<form   name="form" class="form-horizontal css-form" id="form" ng-submit="create_user(user)" novalidate>
+			<div  ng-class="{'has-success' : ifavailable && user.login,'has-error' : !ifavailable && user.login}" class="form-group   has-feedback" id="form_elment">
+			      <input name="overwrittenlogin" ng-keyup="checkavailable(user)" type="text" class="form-control" id="inputSuccess3" ng-model="user.login" aria-describedby="inputSuccess3Status" placeholder="Podaj swój login" required>
+			      <span  ng-class="{'glyphicon glyphicon-ok' : ifavailable && user.login,'glyphicon glyphicon-remove' : !ifavailable && user.login,'glyphicon glyphicon-warning-sign': form.overwrittenlogin.$invalid}" class="form-control-feedback" aria-hidden="true"></span>
+			      <span id="inputSuccess3Status" class="sr-only">(success)</span>
+ 			</div>
+ 			
+
+ 			<div ng-class="{'has-success' : !form.overwrittenEmail.$error.email && user.email,'has-error' : form.overwrittenEmail.$error.email}" id="form_elment" class="form-group has-feedback">
+			      <div class="input-group">
+			        <span class="input-group-addon">@</span>
+			        <input type="email"  ng-keyup="errors=0" class="form-control" ng-model="user.email" id="inputGroupSuccess2" aria-describedby="inputGroupSuccess2Status" overwrite-email name="overwrittenEmail" placeholder="Podaj swój emial" required>
+			      </div>
+			      <span ng-class="{'glyphicon glyphicon-ok' : !form.overwrittenEmail.$error.email && user.email,'glyphicon glyphicon-remove' : form.overwrittenEmail.$error.email && user.email,'glyphicon glyphicon-warning-sign': form.overwrittenEmail.$invalid && !user.email}" class="form-control-feedback" aria-hidden="true"></span>
+			      <span id="inputGroupSuccess2Status" class="sr-only">(success)</span>
+  			</div>
+ 			<!--
+			<div >
+			       <div>
+				    Overwritten Email:
+				    <input type="email" ng-model="myEmail" overwrite-email name="overwrittenEmail" />
+				    <span ng-show="form.overwrittenEmail.$error.email">This email format is invalid!</span><br>
+				    Model: {{myEmail}}
+				    </div>
+
+  			</div>
+  			-->
+			<div  ng-class="{'has-success' : user.password==user.reepedpassword && user.password ,'has-error' : user.password!=user.reepedpassword && user.password}" class="form-group   has-feedback" id="form_elment">
+			      <input  name="overwrittenpass" ng-keyup="checkpass(user)" type="password" class="form-control" id="inputSuccess3" ng-model="user.password" aria-describedby="inputSuccess3Status" placeholder="Podaj twoje hasło " required> 
+			      <span  ng-class="{'glyphicon glyphicon-remove' : user.password!=user.reepedpassword && user.password,'glyphicon glyphicon-ok' : user.password==user.reepedpassword && user.password ,'glyphicon glyphicon-warning-sign': form.overwrittenpass.$invalid}" class="form-control-feedback" aria-hidden="true"></span>
+			      <span id="inputSuccess3Status" class="sr-only">(success)</span>
+ 			</div>
+			<div  ng-class="{'has-success' : user.password==user.reepedpassword && user.reepedpassword,'has-error' : user.password!=user.reepedpassword && user.reepedpassword}"  class="form-group   has-feedback" id="form_elment">
+			      <input name="overwrittenpassreped" ng-keyup="checkpass(user)" type="password" class="form-control" id="inputSuccess3" ng-model="user.reepedpassword" aria-describedby="inputSuccess3Status" placeholder="Powtórz swoje hasło" required>
+			      <span  ng-class="{'glyphicon glyphicon-remove' : user.password!=user.reepedpassword && user.reepedpassword,'glyphicon glyphicon-ok' : user.password==user.reepedpassword && user.reepedpassword,'glyphicon glyphicon-warning-sign': form.overwrittenpassreped.$invalid}" class="form-control-feedback" aria-hidden="true"></span>
+			      <span id="inputSuccess3Status" class="sr-only">(success)</span>
+ 			</div>
+			    <div class="" style="margin-top: 35px;">
+				  <div class="checkbox">
+				    <label>
+				      <input type="checkbox" id="checkboxError" ng-model="user.agreement" value="option1">
+				      	Zgadzam sie na przetwarzanie moich danych osobowych 
+				    </label>
+				  </div>
+				</div>
+			<button type="submit" class="btn btn-primary btn-lg btn-block" id="submit_registration">Zarejestruj</button>
+  	</form>
+  		
+</div>
+

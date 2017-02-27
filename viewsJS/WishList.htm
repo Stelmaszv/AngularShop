@@ -1,0 +1,35 @@
+<input type="text" class="form-control formpadding" ng-model="prod" placeholder="Szukaj Produktu">
+<div ng-repeat="list in WishList | filter:prod" class="row list-group-item">
+
+	<a id="linkblack" href="#/product/show/{{list.id_prod}}/{{list.name}}"  >
+		<img class="col-md-4 img-thumbnail" src="photo/{{list.id_prod}}/{{list.photo}} " ng-if="list.photo!=''"  style="width:150px; height:150px; ">
+		<img class="col-md-4 img-thumbnail" src="style/web/no-image.png " ng-if="list.photo==''"  style="width:150px; height:150px; ">
+		<h1 class="col-md-3">{{list.name}}</h1>
+		
+	</a>
+		<div  class="col-md-5 pull-right">
+			<div ng-if="list.promotion_stan=='no'" class="btn btn-success pull-right btn-lg">{{list.price | number:2}} zł</div>
+			<div ng-if="list.promotion_stan=='yes'" >
+
+				<p class="btn btn-success pull-right btn-lg">
+					<s style="font-size:15px;">
+				  	{{list.price | number:2}} zł</s>
+				  	{{list.newprice | number:2}} zł 
+			  	</p>
+			  	<p class="btn btn-info pull-right btn-lg" style="margin-right: 20px;">
+					{{list.procentptomo}} %
+				</p>
+
+			</div>
+			<br>
+			<br>
+			<br>
+				<div class="btn btn-default  pull-right btn-lg" ng-click="deleteLIST(list,$index)" style="margin-top:30px;">
+					Usuń z listy
+				</div>
+		</div>
+		<b class="col-md-3 pull-left">{{list.catname}}/{{list.subname}}</b>
+</div>
+<b ng-if="!WishList.length" class="row list-group-item">
+				Lista życzeń jest pusta
+</b>

@@ -1,0 +1,23 @@
+<div ng-repeat="mesage in mesages"  class="row list-group-item">
+
+	<p ng-click="deleteMesage(mesage,$index)" class="col-md-6 pull-left">{{mesage.text}} </p>
+	<p ng-click="deleteMesage(mesage,$index)" class="col-md-2"><a id="linkblack" href="#/product/show/{{mesage.id_prod}}/{{mesage.name}}">{{mesage.name}} </a></p>
+	<div class="col-md-4" ng-if="mesage.promotion_stan=='yes'" >
+
+				<p class="btn btn-success pull-right">
+					<s style="font-size:15px;">
+				  	{{mesage.price | number:2}} zł</s>
+				  	{{mesage.newprice | number:2}} zł 
+			  	</p>
+			  	<p class="btn btn-info pull-right" style="margin-right: 20px;">
+					{{mesage.procentptomo}} %
+				</p>
+
+			</div>
+		
+	</div>
+
+
+<b ng-if="!mesages.length" class="row list-group-item">
+	Brak Powiadomien
+</b>
